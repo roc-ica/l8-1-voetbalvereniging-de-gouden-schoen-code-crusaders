@@ -1,49 +1,62 @@
 header {
-    background-color: #ffffff;
-    color: #222222;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+	background-color: #ffffff;
+	color: #222222;
+	padding: 20px;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-template-areas: "logo logo logo logo nav nav login login login login";
 }
 
 h1 {
-    margin: 0;
-    font-size: 36px;
+	margin: 0;
+	font-size: 36px;
+}
+
+.Logo-Header {
+	grid-area: logo;
 }
 
 .ulheader {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+	list-style-type: none;
+	grid-area: nav;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	margin: 0;
 }
 
 .liheader {
-    display: inline;
-    margin: 0 20px;
+	display: inline;
+	margin: 0 20px;
+}
+
+.Login-Header {
+	grid-area: login;
+	display: flex;
+	align-items: center;
+	justify-content: end;
 }
 
 .buttonLogin {
-    background-color: #2f2e2e;
-    color: white;
-    border: none;
-    padding: 10px 20px;
+	background-color: #2f2e2e;
+	color: white;
+	border: none;
+	padding: 10px 20px;
 }
 
-
 @media only screen and (max-width: 600px) {
-    h1 {
-        font-size: 28px;
-    }
+	h1 {
+		font-size: 28px;
+	}
 
-    .liheader {
-        margin: 0 10px;
-    }
+	.liheader {
+		margin: 0 10px;
+	}
 }
 
 @media only screen and (max-width: 400px) {
-    h1 {
-        font-size: 24px;
-    }
-
+	h1 {
+		font-size: 24px;
+	}
 }

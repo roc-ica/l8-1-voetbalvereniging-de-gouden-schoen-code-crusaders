@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Home Page</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -9,29 +10,31 @@
     <link rel="stylesheet" href="../Media/CSS/header.css">
     <link rel="stylesheet" href="../Media/CSS/home.css">
 </head>
+
 <body>
-<header>
-    <h1>De <span class="gold">Gouden</span>schoen</h1>
-    <ul class="ulheader">
-        <li class="liheader">home</li>
-        <li class="liheader">agenda</li>
-        <li class="liheader">contact</li>
-    </ul>
-    <div>
-        <button class="buttonLogin">login</button>
-        <button id="darkModeButton" class="buttonLogin">Dark Mode</button>
+    <header>
+        <h1 class="Logo-Header">De <span class="gold">Gouden</span>schoen</h1>
+        <ul class="ulheader">
+            <li class="liheader">home</li>
+            <li class="liheader">agenda</li>
+            <li class="liheader">contact</li>
+        </ul>
+        <div class="Login-Header">
+            <button class="buttonLogin">login</button>
+            <button id="darkModeButton" class="buttonLogin">Dark Mode</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <br>
+        <h2>Voetbalvereniging de Goudenschoen</h2>
+        <p>Welkom op onze website.</p> <br>
     </div>
-</header>
+    <img src="../Media/img/schoen.jpg" alt="Centered Image">
 
-<div class="container">
+    <script src="../Media/JS/darkmode.js"></script>
     <br>
-    <h2>Voetbalvereniging de Goudenschoen</h2>
-    <p>Welkom op onze website.</p> <br>
-</div>
-<img src="../Media/img/schoen.jpg" alt="Centered Image">
-
-<script src="../Media/JS/darkmode.js"></script>
-<br>
-<br>
+    <br>
 </body>
+
 </html>
