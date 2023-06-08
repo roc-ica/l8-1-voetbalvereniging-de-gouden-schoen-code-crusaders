@@ -1,0 +1,50 @@
+
+.container {
+    border-radius: 10px ;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.55);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.liheader {
+    margin: 0 5px;
+}
+
+.buttonLogin {
+    padding: 8px 16px;
+}
+
+.container {
+
+    align-items: center;
+}
+
+.container-content {
+    margin-left: 20px;
+}
+
+img {
+    border: 5px solid #dcb64c;
+    border-radius: 10px;
+    max-width: 50%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.container {
+    text-align: center;
+}
+
+.container img {
+    display: block;
+    margin: 0 auto;
+    border: 5px solid gold;
+    border-radius: 10px;
+    max-width: 50%;
+    height: auto;
+}

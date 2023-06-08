@@ -1,0 +1,60 @@
+
+* {
+    font-family: 'Geologica', sans-serif;
+}
+
+.gold {
+    color: #dcb64c;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f1f1f1;
+}
+
+body.dark-mode {
+    background-color: #222222;
+    color: #ffffff;
+}
+
+body.dark-mode header {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+body.dark-mode .buttonLogin {
+    background-color: #ffffff;
+    color: #222222;
+}
+
+body.dark-mode .container {
+    background-color: #2f2e2e;
+}
+
+.liheader {
+    margin: 0 5px;
+}
+
+.buttonLogin {
+    padding: 8px 16px;
+}
+
+::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Background color of the track */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #a9a4a4; /* Color of the scrollbar thumb */
+    border-radius: 5px; /* Rounded corners */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #c0c0c0; /* Color of the scrollbar thumb on hover */
+}

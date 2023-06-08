@@ -1,19 +1,37 @@
-<?php
-
-?>
-
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>De Gouden Schoen</title>
+    <title>Home Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@200&family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../Media/CSS/main.css">
+    <link rel="stylesheet" href="../Media/CSS/header.css">
+    <link rel="stylesheet" href="../Media/CSS/home.css">
 </head>
-
 <body>
-    <?php include "../Media/Templates/Header.php" ?>
-</body>
+<header>
+    <h1>De <span class="gold">Gouden</span>schoen</h1>
+    <ul class="ulheader">
+        <li class="liheader">home</li>
+        <li class="liheader">agenda</li>
+        <li class="liheader">contact</li>
+    </ul>
+    <div>
+        <button class="buttonLogin">login</button>
+        <button id="darkModeButton" class="buttonLogin">Dark Mode</button>
+    </div>
+</header>
 
+<div class="container">
+    <br>
+    <h2>Voetbalvereniging de Goudenschoen</h2>
+    <p>Welkom op onze website.</p> <br>
+</div>
+<img src="../Media/img/schoen.jpg" alt="Centered Image">
+
+<script src="../Media/JS/darkmode.js"></script>
+<br>
+<br>
+</body>
 </html>
