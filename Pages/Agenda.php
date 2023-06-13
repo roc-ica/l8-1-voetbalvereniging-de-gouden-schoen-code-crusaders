@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <?php include "../Media/Templates/Header.php" ?>
+    <?php include "../Media/Templates/header.php" ?>
 </body>
 
 </html>

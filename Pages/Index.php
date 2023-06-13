@@ -12,18 +12,9 @@
 </head>
 
 <body>
-    <header>
-        <h1 class="Logo-Header">De <span class="gold">Gouden</span>schoen</h1>
-        <ul class="ulheader">
-            <li class="liheader">home</li>
-            <li class="liheader">agenda</li>
-            <li class="liheader">contact</li>
-        </ul>
-        <div class="Login-Header">
-            <button class="buttonLogin">login</button>
-            <button id="darkModeButton" class="buttonLogin">Dark Mode</button>
-        </div>
-    </header>
+
+    <?php include "../Media/Templates/header.php" ?>
+
 
     <div class="container">
         <br>
