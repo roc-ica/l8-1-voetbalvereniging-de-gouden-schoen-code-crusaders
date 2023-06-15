@@ -1,0 +1,91 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+    font-family: 'Geologica', sans-serif;
+}
+
+.blok {
+    border: 10px solid black;
+    height: 366px;
+    width: 900px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border-radius: 20px;
+    
+}
+
+img {
+    width: 70%;
+    filter: brightness(65%);
+}
+
+.inlog {
+    float: right;
+    font-family: 'Geologica', sans-serif;
+    background-color: white;
+}
+
+.submit_button {
+
+}
+.submit {
+    width: 75%;
+    background-color: #2b2727;
+    color: #fff;
+    cursor: pointer;
+    height: 30px;
+    font-size: 16px;
+}
+
+.copy{
+    font-size: 7px;
+
+}
+
+.input_veld {
+    padding: 5px 10px;
+    font-family: 'Geologica', sans-serif;
+}
+
+form i {
+    margin-left: -30px;
+    cursor: pointer;
+    color: black;
+}
+
+.blok1 {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 450px; 
+    height: 450px;
+    background: linear-gradient(to right, #dcb64c, black); 
+    border-radius: 230px;
+    overflow: visible;  
+}
+
+.blok2 {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 350px; 
+    height: 350px; 
+    background: linear-gradient(to right, #dcb64c, black);
+    border-radius: 200px;
+    overflow: visible;  
+}
+
+@media screen and (max-width: 1039px) {
+  .blok2{
+    visibility: hidden;
+  }
+  }

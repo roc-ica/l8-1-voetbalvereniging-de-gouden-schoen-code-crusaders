@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+    font-family: 'Geologica', sans-serif;
+}
+
+#background {
+    border: 10px solid black;
+    min-height: 100px;
+    width: 900px;
+    margin-top: 150px;
+    border-radius: 20px;
+    background: linear-gradient(black, #dcb64c);
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.table_crud {
+    color: white;
+}
+
+.table_crud th,
+.table_crud td {
+    padding-left: 70px;
+    text-align: left;
+}
+

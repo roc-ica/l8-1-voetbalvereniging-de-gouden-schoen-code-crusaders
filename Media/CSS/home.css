@@ -43,7 +43,7 @@ img {
 .container img {
     display: block;
     margin: 0 auto;
-    border: 5px solid gold;
+    border: 5px solid #ffd700;
     border-radius: 10px;
     max-width: 50%;
     height: auto;
