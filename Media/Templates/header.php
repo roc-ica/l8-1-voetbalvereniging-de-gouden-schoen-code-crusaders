@@ -4,12 +4,12 @@
 <header>
     <h1 class="Logo-Header">De <span class="gold">Gouden</span>schoen</h1>
     <ul class="ulheader">
-        <li class="liheader"><a class="headerLink" href="../../Pages/index.php">home</a></li>
-        <li class="liheader"><a class="headerLink" href="../../Pages/Agenda.php">agenda</a></li>
-        <li class="liheader">contact</li>
+        <li class="liheader"><a class="headerLink" href="../../Pages/index.php">Home</a></li>
+        <li class="liheader"><a class="headerLink" href="../../Pages/Agenda.php">Agenda</a></li>
+        <li class="liheader">Contact</li>
     </ul>
     <div class="Login-Header">
-        <button class="buttonLogin">login</button>
-        <button id="darkModeButton" class="buttonLogin">Dark Mode</button>
+        <button class="buttonLogin">Inloggen</button>
+        <button id="darkModeButton" class="buttonLogin">Donkere Modus</button>
     </div>
 </header>
