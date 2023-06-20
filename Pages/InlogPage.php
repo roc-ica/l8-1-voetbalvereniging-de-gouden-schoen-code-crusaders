@@ -1,3 +1,44 @@
+<?php
+session_start();
+
+include "../Media/Templates/DBConnect.php";
+
+if (isset($_POST['submit'])) {
+    $email = htmlspecialchars($_POST['email']);
+    $password = htmlspecialchars($_POST['password']);
+
+    $sql = "SELECT id, email, password, role FROM user WHERE email = ? AND status = 'TRUE'";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('s', $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    try {
+        while ($row = $result->fetch_array()) {
+            $passwordreturn = password_verify($password, $row['password']);
+            $role = $row['rol'];
+
+            if ($passwordreturn) {
+                $_SESSION['user_id'] = $row['id'];
+                $_SESSION['email'] = $email;
+                $_SESSION['role'] = $row['role'];
+                $_SESSION['sessionid'] = session_id();
+                //alert('Je bent ingelogd');
+    
+            }
+        }
+    } catch (Exception $e) {
+        $e->getMessage();
+    }
+ 
+    if($_SESSION['role'] == 'admin') {
+        header('Location: UserOverview.php');
+    } else {
+        header("Refresh:0.1; url=TaskOverview.php", true, 303);
+    }
+
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
