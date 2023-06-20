@@ -13,7 +13,9 @@
 
 <body>
 
-    <?php include "../Media/Templates/header.php" ?>
+    <?php include "../Media/Templates/header.php";
+          include "../Media/Templates/DBConnect.php";
+    ?>
 
 
     <div class="container">

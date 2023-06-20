@@ -25,6 +25,11 @@ body.dark-mode header {
     color: #ffffff;
 }
 
+a.dark-mode {
+    background-color: #333333;
+    color: #ffffff;
+}
+
 body.dark-mode .buttonLogin {
     background-color: #ffffff;
     color: #222222;
