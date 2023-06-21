@@ -37,7 +37,7 @@ h1 {
 	align-items: center;
 	justify-content: end;
 }
-	
+
 .buttonLogin {
 	background-color: #2f2e2e;
 	color: white;
@@ -51,6 +51,10 @@ h1 {
 	color: black;
 	text-decoration: none;
 	cursor: pointer;
+}
+
+body.dark-mode .headerLink {
+	color: #ffffff;
 }
 
 @media only screen and (max-width: 600px) {
