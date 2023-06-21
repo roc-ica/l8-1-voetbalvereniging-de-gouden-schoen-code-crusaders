@@ -1,5 +1,27 @@
 <?php
 
+if(isset($_POST['submit'])){
+    $fname = htmlspecialchars($_POST['firstname']);
+    $lname = htmlspecialchars($_POST['lastname']);
+    $email = htmlspecialchars($_POST['email']);
+    $wachtwoord = password_hash($_POST['wachtwoord'], PASSWORD_DEFAULT);
+    $sql2 = "SELECT gebruikersnaam FROM eel_gebruiker WHERE email = ?";
+    $stmt2 = $conn->prepare($sql2);
+    $stmt2->bind_param("s", $email);
+    $stmt2->execute();
+    $result2 = $stmt2->get_result();
+    if ($row = $result2->fetch_array() == true) {
+        echo "<script>alert('Email is al in gebruik');</script>";
+    } else {
+        $sql = "INSERT INTO `eel_gebruiker` (`gebruikersnaam`, `email`, `wachtwoord`) VALUES (?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sss", $name, $email, $wachtwoord);
+        $result = $stmt->execute();
+        alert('Account has been created');
+        header( "Refresh:0.1; url=login.php", true, 303);
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
