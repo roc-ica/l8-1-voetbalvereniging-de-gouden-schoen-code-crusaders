@@ -84,7 +84,7 @@ form i {
     overflow: visible;  
 }
 
-@media screen and (max-width: 1039px) {
+@media screen and (max-width: 1148px) {
   .blok2{
     visibility: hidden;
   }
