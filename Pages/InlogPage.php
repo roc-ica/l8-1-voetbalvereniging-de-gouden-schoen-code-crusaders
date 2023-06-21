@@ -4,40 +4,38 @@ session_start();
 include "../Media/Templates/DBConnect.php";
 
 if (isset($_POST['submit'])) {
-    $email = htmlspecialchars($_POST['email']);
-    $password = htmlspecialchars($_POST['password']);
 
-    $sql = "SELECT id, email, password, role FROM user WHERE email = ? AND status = 'TRUE'";
+    $email = htmlspecialchars($_POST['email']);
+    $PASSWORD = htmlspecialchars($_POST['password']);
+
+    $sql = "SELECT user_ID, email, PASSWORD, role FROM user WHERE email =?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('s', $email);
     $stmt->execute();
     $result = $stmt->get_result();
 
+
     try {
         while ($row = $result->fetch_array()) {
-            $passwordreturn = password_verify($password, $row['password']);
-            $role = $row['rol'];
+            //result is in row
+            $passwordreturn = password_verify($PASSWORD, $row['PASSWORD']);
+            // var_dump($passwordreturn); die;
+            $role = $row['role'];
 
             if ($passwordreturn) {
-                $_SESSION['user_id'] = $row['id'];
                 $_SESSION['email'] = $email;
                 $_SESSION['role'] = $row['role'];
-                $_SESSION['sessionid'] = session_id();
-                //alert('Je bent ingelogd');
-    
+                header( "Refresh:0.1; url=TaskOverview.php", true, 303);
             }
         }
     } catch (Exception $e) {
         $e->getMessage();
     }
- 
-    if($_SESSION['role'] == 'admin') {
-        header('Location: UserOverview.php');
-    } else {
-        header("Refresh:0.1; url=TaskOverview.php", true, 303);
-    }
+
 
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,13 +58,12 @@ if (isset($_POST['submit'])) {
         <div class="blok">
             <div class="veld">
                 <img src="../Media/img/schoen.jpg">
-
                 <div class="inlog">
                     <br>
                     <h2>Inloggen</h2>
                     <br>
                     <br>
-                    <form action="" class="form">
+                    <form action="InlogPage.php" class="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                         <div class="form__veld">
                             <label for="email">Email</label><br>
                             <input type="text" class="input_veld" name="email" id="email">
@@ -80,7 +77,7 @@ if (isset($_POST['submit'])) {
                         
                         <br>
                         <div class="submit_button">
-                            <button name="submit" class="submit">Inloggen</button>
+                            <button type="submit" class="submit" name="submit">Inloggen</button>
                         </div>
                     </form>
                     <br>    
