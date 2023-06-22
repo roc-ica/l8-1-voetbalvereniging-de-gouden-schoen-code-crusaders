@@ -9,12 +9,16 @@ $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 $FirstName = $row['FirstName'];
 $LastName = $row['LastName'];
+$Email = $row['Email'];
+$Role = $row['Role'];
 
 if (isset($_POST['submit'])) {
     $FirstName = htmlspecialchars($_POST['FirstName']);
     $LastName = htmlspecialchars($_POST['LastName']);
+    $Email = htmlspecialchars($_POST['Email']);
+    $Role = htmlspecialchars($_POST['Role']);
 
-    $sql = "UPDATE `user` SET user_id =  $user_ID, FirstName = '$FirstName', LastName = '$LastName' WHERE user_ID = $user_ID";
+    $sql = "UPDATE `user` SET user_id =  $user_ID, FirstName = '$FirstName', LastName = '$LastName', Email = '$Email', Role = '$Role' WHERE user_ID = $user_ID";
     $result = mysqli_query($conn, $sql);
     if ($result) {
         header('Location: UserOverview.php');
@@ -42,6 +46,15 @@ if (isset($_POST['submit'])) {
         <div class="LastName">
             <input type="text" class="LastName" id="LastName" name="LastName" placeholder="LastName" value=<?php echo $LastName; ?>>
         </div>
+        <br>
+        <div class="Email">
+            <input type="text" class="Email" id="Email" name="Email" placeholder="Email" value=<?php echo $Email; ?>>
+        </div>
+        <br>
+        <div class="Role">
+            <input type="text" class="Role" id="Role" name="Role" placeholder="Role" value=<?php echo $Role; ?>>
+        </div>
+        <br>
         <button type="sumbit" name="submit">Opslaan</button>
     </form>
 </body>
