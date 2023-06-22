@@ -4,12 +4,14 @@ include "../Media/Templates/header.php";
 include "../Media/Templates/DBConnect.php";
 
 if (isset($_POST['submit'])) {
+    $voornaam = $_POST['voornaam'];
+    $achternaam = $_POST['achternaam'];
     $email = $_POST['email'];
     $wachtwoord = $_POST['password'];
 
     $hashed_password = password_hash($wachtwoord, PASSWORD_DEFAULT);
-    $stmt = $conn->prepare("INSERT INTO user (Email, Password) VALUES (?, ?)");
-    $stmt->bind_param("ss", $email, $hashed_password);
+    $stmt = $conn->prepare("INSERT INTO user (FirstName, LastName, Email, Password) VALUES (?,?,?,?)");
+    $stmt->bind_param("ssss", $voornaam, $achternaam, $email, $hashed_password);
     $stmt->execute();
 }
 
@@ -37,6 +39,16 @@ if (isset($_POST['submit'])) {
                     <br>
                     <br>
                     <form class="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                    <div class="form__veld">
+                            <label for="email">voornaam</label><br>
+                            <input type="text" class="input_veld" name="voornaam" id="voornaam">
+                        </div>
+                        <br>
+                        <div class="form__veld">
+                            <label for="email">achternaam</label><br>
+                            <input type="text" class="input_veld" name="achternaam" id="achternaam">
+                        </div>
+                        <br>
                         <div class="form__veld">
                             <label for="email">Email</label><br>
                             <input type="text" class="input_veld" name="email" id="email">

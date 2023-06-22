@@ -9,12 +9,16 @@ $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 $FirstName = $row['FirstName'];
 $LastName = $row['LastName'];
+$Email = $row['Email'];
+$Role = $row['Role'];
 
 if (isset($_POST['submit'])) {
     $FirstName = htmlspecialchars($_POST['FirstName']);
     $LastName = htmlspecialchars($_POST['LastName']);
+    $Email = htmlspecialchars($_POST['Email']);
+    $Role = htmlspecialchars($_POST['Role']);
 
-    $sql = "UPDATE `user` SET FirstName = '$FirstName', LastName = '$LastName' WHERE user_ID = $user_ID";
+    $sql = "UPDATE `user` SET FirstName = '$FirstName', LastName = '$LastName', Email = '$Email', Role = '$Role' WHERE user_ID = $user_ID";
     $result = mysqli_query($conn, $sql);
     if ($result) {
         header('Location: UserOverview.php');
@@ -34,7 +38,7 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
-    <form action="" method="POST">
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
         <div class="FirstName">
             <input type="text" class="FirstName" id="FirstName" name="FirstName" placeholder="FirstName" value=<?php echo $FirstName; ?>>
         </div>

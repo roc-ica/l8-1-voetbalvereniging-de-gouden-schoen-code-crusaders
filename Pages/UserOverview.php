@@ -1,3 +1,18 @@
+<?php
+include '../Media/Templates/DBConnect.php';
+
+if (isset($_GET['wisid'])) {
+    $id = $_GET['wisid'];
+
+    echo '<script type="text/javascript">
+        if (confirm("Weet je zeker dat je deze gebruiker wilt verwijderen?")) {
+            window.location.href = "wis.php?wisid=' . $user_ID . '";
+        } else {
+            window.location.href = "UserOverview.php";
+        }
+        </script>';
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,7 +62,7 @@
                     <td data-label="Rol: ">' . $Role . '</td>
             
                     <td>
-                    <button id="del" class="del"><a href="wis.php? wisid=' . $user_ID . '"><i class="fa-solid fa-trash" id="del"></i></a></button>
+                    <button id="del" onclick="confirmDelete(' . $user_ID . ')" class="del"><a href="wis.php? wisid=' . $user_ID . '"><i class="fa-solid fa-trash" id="del"></i></a></button>
                     <button id="wijzig" class="wijzig"><a href="wijzig.php? wijzigid=' . $user_ID . '"><i class="fa-solid fa-pen-to-square" id="chang"></i></a></button>
 
                     </td>
@@ -62,5 +77,12 @@
         </div>
     </div>
 </body>
+<script type="text/javascript">
+    function confirmDelete(user_ID) {
+        if (confirm("Weet je zeker dat je deze gebruiker wilt verwijderen?")) {
+            window.location.href = "wis.php?wisid=" + user_ID;
+        }
+    }
 
+</script>
 </html>
