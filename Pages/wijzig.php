@@ -14,7 +14,7 @@ if (isset($_POST['submit'])) {
     $FirstName = htmlspecialchars($_POST['FirstName']);
     $LastName = htmlspecialchars($_POST['LastName']);
 
-    $sql = "UPDATE `user` SET user_id =  $user_ID, FirstName = '$FirstName', LastName = '$LastName' WHERE user_ID = $user_ID";
+    $sql = "UPDATE `user` SET FirstName = '$FirstName', LastName = '$LastName' WHERE user_ID = $user_ID";
     $result = mysqli_query($conn, $sql);
     if ($result) {
         header('Location: UserOverview.php');
@@ -37,6 +37,14 @@ if (isset($_POST['submit'])) {
     <form action="" method="POST">
         <div class="FirstName">
             <input type="text" class="FirstName" id="FirstName" name="FirstName" placeholder="FirstName" value=<?php echo $FirstName; ?>>
+        </div>
+        <br>
+        <div class="LastName">
+            <input type="text" class="LastName" id="LastName" name="LastName" placeholder="LastName" value=<?php echo $LastName; ?>>
+        </div>
+        <br>
+        <div class="Email">
+            <input type="text" class="Email" id="Email" name="Email" placeholder="Email" value=<?php echo $Email; ?>>
         </div>
         <br>
         <div class="LastName">

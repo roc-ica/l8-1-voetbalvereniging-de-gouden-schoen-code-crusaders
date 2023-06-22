@@ -18,7 +18,8 @@
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Naam</th>
+                        <th scope="col">Voornaam</th>
+                        <th scope="col">Achternaam</th>
                         <th scope="col">Email</th>
                         <th scope="col">Rol</th>
                         <th scope="col">Actie</th>
@@ -34,12 +35,14 @@
                 while ($row = $result->fetch_object()) {
                     $user_ID = $row->user_ID;
                     $FirstName = $row->FirstName;
+                    $LastName = $row->LastName;
                     $Email = $row->Email;
                     $Role = $row->Role;
 
                     echo '<tr class="actief">
                     <th scope="row">' . $user_ID . '</th>
-                    <td data-label="Naam: ">' . $FirstName . '</td>
+                    <td data-label="Voornaam: ">' . $FirstName . '</td>
+                    <td data-label="Achternaam: ">' . $LastName . '</td>
                     <td data-label="Email: ">' . $Email . '</td>
                     <td data-label="Rol: ">' . $Role . '</td>
             
