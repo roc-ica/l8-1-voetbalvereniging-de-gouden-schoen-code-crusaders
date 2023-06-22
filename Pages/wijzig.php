@@ -16,7 +16,7 @@ if (isset($_POST['submit'])) {
     $FirstName = htmlspecialchars($_POST['FirstName']);
     $LastName = htmlspecialchars($_POST['LastName']);
     $Email = htmlspecialchars($_POST['Email']);
-    $Role = htmlspecialchars($_POST['Role']);
+    $Role = htmlspecialchars($_POST['rol']);
 
     $sql = "UPDATE `user` SET FirstName = '$FirstName', LastName = '$LastName', Email = '$Email', Role = '$Role' WHERE user_ID = $user_ID";
     $result = mysqli_query($conn, $sql);
@@ -51,8 +51,12 @@ if (isset($_POST['submit'])) {
             <input type="text" class="Email" id="Email" name="Email" placeholder="Email" value=<?php echo $Email; ?>>
         </div>
         <br>
-        <div class="LastName">
-            <input type="text" class="LastName" id="LastName" name="LastName" placeholder="LastName" value=<?php echo $LastName; ?>>
+        <div class="Rol">
+            <select name="rol" id="rol">
+                <option <?php if($Role == '0'){echo("selected");}?> value="0">Inactief</option>
+                <option <?php if($Role == '1'){echo("selected");}?> value="1">Gebruiker</option>
+                <option <?php if($Role == '2'){echo("selected");}?> value="2">Admin</option>
+            </select>
         </div>
         <button type="sumbit" name="submit">Opslaan</button>
     </form>
