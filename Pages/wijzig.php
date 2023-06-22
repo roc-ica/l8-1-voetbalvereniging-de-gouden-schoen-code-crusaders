@@ -38,7 +38,7 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
-    <form action="" method="POST">
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
         <div class="FirstName">
             <input type="text" class="FirstName" id="FirstName" name="FirstName" placeholder="FirstName" value=<?php echo $FirstName; ?>>
         </div>
