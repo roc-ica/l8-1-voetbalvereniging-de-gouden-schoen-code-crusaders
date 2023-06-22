@@ -1,3 +1,18 @@
+<?php
+include '../Media/Templates/DBConnect.php';
+
+if (isset($_GET['wisid'])) {
+    $id = $_GET['wisid'];
+
+    echo '<script type="text/javascript">
+        if (confirm("Weet je zeker dat je deze gebruiker wilt verwijderen?")) {
+            window.location.href = "wis.php?wisid=' . $user_ID . '";
+        } else {
+            window.location.href = "UserOverview.php";
+        }
+        </script>';
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,6 +21,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@200&family=Roboto&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/5622272db3.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../Media/CSS/UserOverview.css">
     <title>De Gouden Schoen || User Overview</title>
 </head>
@@ -26,26 +42,26 @@
                 <tbody>
                 <?php
             include "../Media/Templates/DBConnect.php";
-            $sql = "SELECT * FROM `users_elearn`";
+            $sql = "SELECT * FROM `user`";
             $result = $conn->query($sql);
 
             if ($result) {
                 while ($row = $result->fetch_object()) {
-                    $id = $row->id;
-                    $username = $row->username;
-                    $email = $row->email;
-                    $rol = $row->rol;
+                    $user_ID = $row->user_ID;
+                    $FirstName = $row->FirstName;
+                    $Email = $row->Email;
+                    $Role = $row->Role;
 
                     echo '<tr class="actief">
-                    <th scope="row">' . $id . '</th>
-                    <td data-label="Naam: ">' . $username . '</td>
-                    <td data-label="Email: ">' . $email . '</td>
-                    <td data-label="Rol: ">' . $rol . '</td>
+                    <th scope="row">' . $user_ID . '</th>
+                    <td data-label="Naam: ">' . $FirstName . '</td>
+                    <td data-label="Email: ">' . $Email . '</td>
+                    <td data-label="Rol: ">' . $Role . '</td>
             
                     <td>
-                    <button class="trash"><a href="wis.php? wisid=' . $id . '">Wis</a></button>
-                    <button class="trash"><a href="wijzig.php? wijzigid=' . $id . '">Wijzig</a></button>
-                    
+                    <button id="del" onclick="confirmDelete(' . $user_ID . ')" class="del"><a href="wis.php? wisid=' . $user_ID . '"><i class="fa-solid fa-trash" id="del"></i></a></button>
+                    <button id="wijzig" class="wijzig"><a href="wijzig.php? wijzigid=' . $user_ID . '"><i class="fa-solid fa-pen-to-square" id="chang"></i></a></button>
+
                     </td>
                 
                     </tr>';
@@ -58,5 +74,12 @@
         </div>
     </div>
 </body>
+<script type="text/javascript">
+    function confirmDelete(user_ID) {
+        if (confirm("Weet je zeker dat je deze gebruiker wilt verwijderen?")) {
+            window.location.href = "wis.php?wisid=" + user_ID;
+        }
+    }
 
+</script>
 </html>

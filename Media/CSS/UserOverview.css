@@ -31,3 +31,60 @@ body {
     text-align: left;
 }
 
+
+#del {
+    background: none;
+    border: none;
+    color: red;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+
+#del:hover {
+    background: none;
+    border: none;
+    color: red;
+    cursor: pointer;
+    transform: scale(1.5);
+}
+
+
+#chang {
+    background: none;
+    border: none;
+    color: blue;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+
+#chang:hover {
+    background: none;
+    border: none;
+    color: blue;
+    cursor: pointer;
+    transform: scale(1.8);
+}
+
+button.wijzig {
+    border: none;
+    background: none;
+}
+
+button.wijzig a {
+    border: none;
+    background: none;
+    color: black;
+    transition: all .3s ease-in-out;
+}
+
+del.wijzig {
+    border: none;
+    background: none;
+}
+
+del.wijzig a {
+    border: none;
+    background: none;
+    color: black;
+    transition: all .3s ease-in-out;
+}
