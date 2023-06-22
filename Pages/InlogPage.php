@@ -25,14 +25,12 @@ if (isset($_POST['submit'])) {
             if ($passwordreturn) {
                 $_SESSION['email'] = $email;
                 $_SESSION['role'] = $row['role'];
-                header( "Refresh:0.1; url=TaskOverview.php", true, 303);
+                header("Refresh:0.1; url=TaskOverview.php", true, 303);
             }
         }
     } catch (Exception $e) {
         $e->getMessage();
     }
-
-
 }
 
 
@@ -53,7 +51,7 @@ if (isset($_POST['submit'])) {
 <body>
     <div class="blok1"></div>
     <div class="blok2"></div>
- 
+
     <div id="content">
         <div class="blok">
             <div class="veld">
@@ -74,13 +72,19 @@ if (isset($_POST['submit'])) {
                             <input type="password" class="input_veld" name="password" id="password" />
                             <i class="fa-solid fa-eye-slash" onclick="myEye()"></i>
                         </div>
-                        
+
                         <br>
                         <div class="submit_button">
                             <button type="submit" class="submit" name="submit">Inloggen</button>
                         </div>
+                        <br>
+                        <div class="submit_button">
+                            <a href="../Pages/registreren.php">
+                                <button type="button" class="submit">Registreren</button>
+                            </a>
+                        </div>
                     </form>
-                    <br>    
+                    <br>
                     <br>
                     <div class="copy">
                         <p>© De gouden schoen. All rights reserved | Design by Code Crusaders</p>
@@ -92,7 +96,7 @@ if (isset($_POST['submit'])) {
 
         </div>
     </div>
-   
+
 </body>
 
 <script>
@@ -106,4 +110,5 @@ if (isset($_POST['submit'])) {
         }
     }
 </script>
+
 </html>

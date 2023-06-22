@@ -9,9 +9,19 @@
         <li class="liheader">Contact</li>
     </ul>
     <div class="Login-Header">
-        <a href="../pages/InlogPage.php">
-            <button class="buttonLogin">Inloggen</button>
-        </a>
+        <?php
+        if (!isset($_SESSION["email"])) :
+        ?>
+            <a href="../pages/InlogPage.php">
+                <button class="buttonLogin">Inloggen</button>
+            </a>
+        <?php else : ?>
+            <a href="../Media/Templates/Logout.php">
+                <button class="buttonLogin">Log-Uit</button>
+            </a>
+        <?php endif ?>
         <button id="darkModeButton" class="buttonLogin">Donkere Modus</button>
     </div>
+    <script src="../Media/JS/darkmode.js"></script>
+
 </header>

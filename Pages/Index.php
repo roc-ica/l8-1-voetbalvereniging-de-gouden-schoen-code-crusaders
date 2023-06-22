@@ -25,7 +25,6 @@
     </div>
     <img src="../Media/img/schoen.jpg" alt="Centered Image">
 
-    <script src="../Media/JS/darkmode.js"></script>
     <br>
     <br>
 </body>
