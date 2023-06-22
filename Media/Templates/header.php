@@ -9,13 +9,9 @@
         <li class="liheader">Contact</li>
     </ul>
     <div class="Login-Header">
-        <button class="buttonLogin" onclick="tologin()" >Inloggen</button>
+        <a href="../pages/InlogPage.php">
+            <button class="buttonLogin">Inloggen</button>
+        </a>
         <button id="darkModeButton" class="buttonLogin">Donkere Modus</button>
     </div>
 </header>
-
-<script>
-        function tologin() {
-            window.location.replace("../Pages/InlogPage.php")
-        }
-    </script>
