@@ -3,29 +3,38 @@ session_start();
 
 include '../Media/Templates/DBConnect.php';
 
+if (isset($_GET['wijzigid'])){
 $user_ID = $_GET['wijzigid'];
-$sql = "SELECT * FROM `user` WHERE user_ID = $user_ID";
-$result = mysqli_query($conn, $sql);
-$row = mysqli_fetch_assoc($result);
+
+$sql = "SELECT * FROM `user` WHERE user_ID = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param('s', $user_ID);
+$stmt->execute();
+$result = $stmt->get_result();
+while ($row = $result->fetch_array()) {
 $FirstName = $row['FirstName'];
 $LastName = $row['LastName'];
 $Email = $row['Email'];
 $Role = $row['Role'];
+}
+}
 
 if (isset($_POST['submit'])) {
     $FirstName = htmlspecialchars($_POST['FirstName']);
     $LastName = htmlspecialchars($_POST['LastName']);
     $Email = htmlspecialchars($_POST['Email']);
     $Role = htmlspecialchars($_POST['rol']);
+    $user_ID = htmlspecialchars($_POST['uid']);
 
-    $sql = "UPDATE `user` SET FirstName = '$FirstName', LastName = '$LastName', Email = '$Email', Role = '$Role' WHERE user_ID = $user_ID";
-    $result = mysqli_query($conn, $sql);
-    if ($result) {
-        header('Location: UserOverview.php');
-    } else {
-        die(mysqli_error($conn));
-    }
+    $sql = "UPDATE `user` SET FirstName = ?, LastName = ?, Email = ?, `Role` = ? WHERE user_ID = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('sssss', $FirstName, $LastName, $Email, $Role, $user_ID);
+    $stmt->execute();
+    header('Location: UserOverview.php');
+
+
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -58,7 +67,8 @@ if (isset($_POST['submit'])) {
                 <option <?php if($Role == '2'){echo("selected");}?> value="2">Admin</option>
             </select>
         </div>
-        <button type="sumbit" name="submit">Opslaan</button>
+        <input type="hidden" name="uid" value=<?php echo $user_ID; ?>>
+        <input type="submit" name="submit" value="opslaan">
     </form>
 </body>
 

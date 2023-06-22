@@ -53,6 +53,15 @@ if (isset($_GET['wisid'])) {
                     $LastName = $row->LastName;
                     $Email = $row->Email;
                     $Role = $row->Role;
+                    if ($Role == 0) {
+                        $Role = "inactief";
+                    }
+                    else if ($Role == 1) {
+                        $Role = "gebruiker";
+                    }
+                    else if ($Role == 2) {
+                        $Role = "admin";
+                    }
 
                     echo '<tr class="actief">
                     <th scope="row">' . $user_ID . '</th>
