@@ -8,7 +8,7 @@ if (isset($_POST['submit'])) {
     $email = htmlspecialchars($_POST['email']);
     $PASSWORD = htmlspecialchars($_POST['password']);
 
-    $sql = "SELECT user_ID, email, PASSWORD, role FROM user WHERE email =?";
+    $sql = "SELECT user_ID, email, `PASSWORD`, `Role` FROM user WHERE email =?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('s', $email);
     $stmt->execute();
@@ -20,11 +20,13 @@ if (isset($_POST['submit'])) {
             //result is in row
             $passwordreturn = password_verify($PASSWORD, $row['PASSWORD']);
             // var_dump($passwordreturn); die;
-            $role = $row['role'];
+            $role = $row['Role'];
 
             if ($passwordreturn) {
                 $_SESSION['email'] = $email;
-                $_SESSION['role'] = $row['role'];
+                $_SESSION['role'] = $role;
+                $_SESSION['uid'] = $row['user_ID'];
+                $_SESSION['sessionid'] = session_id();
                 header("Refresh:0.1; url=TaskOverview.php", true, 303);
             }
         }

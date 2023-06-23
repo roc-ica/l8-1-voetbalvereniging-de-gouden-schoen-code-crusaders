@@ -10,7 +10,7 @@ if (isset($_POST['submit'])) {
     $wachtwoord = $_POST['password'];
 
     $hashed_password = password_hash($wachtwoord, PASSWORD_DEFAULT);
-    $stmt = $conn->prepare("INSERT INTO user (FirstName, LastName, Email, Password) VALUES (?,?,?,?)");
+    $stmt = $conn->prepare("INSERT INTO user (FirstName, LastName, Email, Password, `Role`) VALUES (?,?,?,?,0)");
     $stmt->bind_param("ssss", $voornaam, $achternaam, $email, $hashed_password);
     $stmt->execute();
 }
