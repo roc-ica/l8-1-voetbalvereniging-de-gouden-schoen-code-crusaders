@@ -49,12 +49,13 @@ if (isset($_POST["Submit"])) {
 
     <?php
     if (isset($_SESSION["email"])) :
-        if ($_SESSION["role"] == 1) :
+        if ($_SESSION["role"] == 2) :
     ?>
             <button class="liheader" id="NewTask">New Task</button>
-            <section class="sectionNewTask" id="sectionNewTask">
+            <section class="SectionNewTask" id="SectionNewTask">
                 <div class="WrapperNewTask">
-                    <h3 class="sectionHeader">New Task</h3>
+                    <button class="CloseButton" id="NewTaskClose">X</button>
+                    <h3 class="SectionHeader">New Task</h3>
                     <form action="" method="post" class="NewTaskForm" id="NewTaskForm">
                         <label for="Task">
                             Task:
@@ -62,13 +63,20 @@ if (isset($_POST["Submit"])) {
                         </label>
                         <label for="Catagory">
                             <select id="Catagory" name="Catagory" required>
-                                <option value="Catagory 1">Catagory 1</option>
-                                <option value="Catagory 2">Catagory 2</option>
-                                <option value="Catagory 3">Catagory 3</option>
-                                <option value="Catagory 4">Catagory 4</option>
-                                <option value="Catagory 5">Catagory 5</option>
-                                <option value="Catagory 6">Catagory 6</option>
+                                <?php
+                                $STMT = $conn->prepare("SELECT `Category_ID`, `Name` FROM `category`");
+                                $STMT->execute();
+                                $RESULT = $STMT->get_result();
+                                while ($row = $RESULT->fetch_array()) :?>
+                                    <option value="Catagory 1">Category 1</option>
+                                <?php endwhile ?>
+                                <option value="Catagory 2">Category 2</option>
+                                <option value="Catagory 3">Category 3</option>
+                                <option value="Catagory 4">Category 4</option>
+                                <option value="Catagory 5">Category 5</option>
+                                <option value="Catagory 6">Category 6</option>
                             </select>
+                            <button type="button" class="AddCategoryButton" id="AddCategoryButton">Add Category</button>
                         </label>
                         <div class="NewTaskDateTime">
                             <label for="StartTaskDate">
@@ -97,6 +105,19 @@ if (isset($_POST["Submit"])) {
                     </form>
                 </div>
             </section>
+            <section class="SectionNewCategory" id="SectionNewCategory">
+                <div class="WrapperNewCategory">
+                    <button class="CloseButton" id="NewCategoryClose">X</button>
+                    <h3 class="SectionHeader">New Category</h3>
+                    <form class="NewCategoryForm" id="NewCategoryForm">
+                        <label for="Category">
+                            Category:
+                            <input id="NewCategory" type="text" name="Category" required>
+                        </label>
+                        <button type="button" id="NewCategoryFormSubmit" type="submit">Create Category</button>
+                    </form>
+                </div>
+            </section>
         <?php endif ?>
     <?php endif ?>
 </body>
@@ -104,9 +125,14 @@ if (isset($_POST["Submit"])) {
 <script>
     var taskForm = document.getElementById("NewTaskForm");
     document.getElementById("NewTask").addEventListener("click", function() {
-        document.getElementById("sectionNewTask").style.display = "flex";
+        document.getElementById("SectionNewTask").style.display = "flex";
     });
-
+    document.getElementById("NewTaskClose").addEventListener("click", function() {
+        document.getElementById("SectionNewTask").style.display = "none";
+    });
+    document.getElementById("NewCategoryClose").addEventListener("click", function() {
+        document.getElementById("SectionNewCategory").style.display = "none";
+    });
     taskForm.addEventListener("submit", function(e) {
         var dateCorrect = false;
         var timeCorrect = false;
@@ -125,6 +151,39 @@ if (isset($_POST["Submit"])) {
             taskForm.submit();
         }
     })
+    document.getElementById("NewCategoryFormSubmit").addEventListener("click", function() {
+        FetchQuestion();
+    });
+    document.getElementById("AddCategoryButton").addEventListener("click", function() {
+        document.getElementById("SectionNewCategory").style.display = "flex";
+
+    })
+
+    function FetchQuestion() {
+        const value = document.getElementById("NewCategory").value;
+        const data = {
+            category: value
+        };
+        if (value != "") {
+            fetch("../Media/Fetch/CreateCategory.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data),
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    var category = document.createElement("option");
+                    category.value = data["CategoryId"];
+                    category.text = data["Name"];
+                    document.getElementById("Catagory").appendChild(category);
+                })
+                .catch((error) => {
+                    console.error("Error HUISs:", error);
+                });
+        }
+    }
 </script>
 
 </html>
