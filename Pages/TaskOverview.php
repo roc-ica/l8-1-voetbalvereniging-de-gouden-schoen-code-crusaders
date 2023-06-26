@@ -5,23 +5,19 @@ if (isset($_POST["Submit"])) {
     $title = $_POST["Task"];
     $capacity = $_POST["Capacity"];
     $category = $_POST["Category"];
-    list($hours, $minutes) = explode(":", $_POST["StartTime"]);
-    $startTimestamp = mktime($hours, $minutes);
-    list($hours, $minutes) = explode(":", $_POST["EndTime"]);
-    $endTimestamp = mktime($hours, $minutes);
+    $startDate = $_POST["StartDate"];
+    $startTime = $_POST["StartTime"];
+    $endDate = $_POST["EndDate"];
+    $endTime = $_POST["EndTime"];
 
-    $seconds = $endTimestamp - $startTimestamp;
-    $minutes = ($seconds / 60) % 60;
-    $hours = floor($seconds / (60 * 60));
-    $seconds = $seconds - (60 * $minutes) - (60 * 60 * $hours);
-    var_dump($hours, $minutes, $seconds, $_POST["StartTime"], $_POST["EndTime"]);
-    $duration = $hours . ":" . $minutes . ":" . $seconds;
+    $startDate = $startDate . " " . $startTime;
+    $endDate = $endDate . " " . $endTime;
 
-    $STMT = $conn->prepare("INSERT INTO `task`(`Title`, `Capacity`, `duration`, `Category_ID`) VALUES (?,?,?,?);");
+    $STMT = $conn->prepare("INSERT INTO `task`(`Title`, `Capacity`, `StartDate`, `EndDate`, `Category_ID`) VALUES (?,?,?,?,?);");
     if ($STMT == false) {
         die("Secured");
     }
-    $RESULT = $STMT->bind_param("sisi", $title, $capacity, $duration, $category);
+    $RESULT = $STMT->bind_param("sissi", $title, $capacity, $startDate, $endDate, $category);
     if ($RESULT == false) {
         die("Secured");
     }
@@ -29,6 +25,7 @@ if (isset($_POST["Submit"])) {
     if ($RESULT == false) {
         die("Secured");
     }
+    header("Refresh:0.1; url=TaskOverview.php", true, 303);
 }
 ?>
 <!DOCTYPE html>
@@ -51,7 +48,13 @@ if (isset($_POST["Submit"])) {
 <body>
     <?php include "../Media/Templates/header.php" ?>
     <section class="TaskSection">
-        <button class="buttonLogin" id="NewTask">New Task</button>
+        <?php
+        if (isset($_SESSION["email"])) :
+            if ($_SESSION["role"] == 2) :
+        ?>
+                <button class="buttonLogin" id="NewTask">New Task</button>
+            <?php endif ?>
+        <?php endif ?>
         <div class="TaskContainer">
             <?php
 
@@ -68,7 +71,7 @@ if (isset($_POST["Submit"])) {
 
             while ($row = $RESULT->fetch_array()) : ?>
 
-                <div class="Tasks">
+                <div class="Tasks" id="<?php echo $row["Task_ID"] ?>">
                     <h3><?php echo $row["Title"] ?></h3>
                     <?php if ($row["Description"] != null) : ?>
                         <h4>Description</h4>
@@ -101,7 +104,33 @@ if (isset($_POST["Submit"])) {
                         }
                         ?>
                     </p>
+                    <div>
+                        <h4>Time</h4>
+                        <div>
+                            <h5>Start date</h5>
+                            <div>
+                                <?php
+                                $datetime = explode(" ", $row["StartDate"]);
+                                for ($i = 0; $i < count($datetime); $i++) : ?>
+                                    <p>
+                                        <?php echo $datetime[$i] ?>
+                                    </p>
+                                <?php endfor ?>
+                            </div>
+                            <h5>End date</h5>
+                            <div>
+                                <?php
+                                $datetime = explode(" ", $row["EndDate"]);
+                                for ($i = 0; $i < count($datetime); $i++) : ?>
+                                    <p>
+                                        <?php echo $datetime[$i] ?>
+                                    </p>
+                                <?php endfor ?>
+                            </div>
+                        </div>
+                    </div>
                     <button class="buttonLogin DeleteButton" value="<?php echo $row["Task_ID"] ?>">Delete task</button>
+                    <button class="buttonLogin EditButton" value="<?php echo $row["Task_ID"] ?>">Edit task</button>
                 </div>
 
             <?php endwhile ?>
@@ -119,7 +148,7 @@ if (isset($_POST["Submit"])) {
                                 Task:
                                 <input id="Task" type="text" name="Task" required>
                             </label>
-                            <label for="Catagory">
+                            <label for="Category">
                                 <select id="Category" name="Category" required>
                                     <?php
                                     $STMT = $conn->prepare("SELECT `Category_ID`, `Name` FROM `category`");
@@ -219,14 +248,14 @@ if (isset($_POST["Submit"])) {
     };
 
     var deleteButtons = document.getElementsByClassName("DeleteButton");
-    console.log(deleteButtons);
+    var deleteButtons = document.getElementsByClassName("EditButton");
 
     for (let index = 0; index < deleteButtons.length; index++) {
         deleteButtons[index].addEventListener("click", function() {
-            console.log(this.value);
+            DeleteTask(this.value);
         })
     };
-    
+
 
     function size_check() {
         var r = document.querySelector(':root');
@@ -234,6 +263,26 @@ if (isset($_POST["Submit"])) {
 
         var headerSize = Math.ceil(rect.height);
         r.style.setProperty('--Header-Height', headerSize + 'px');
+    }
+
+    function DeleteTask(taskId) {
+        const data = {
+            task_ID: taskId
+        };
+        fetch("../Media/Fetch/DeleteTask.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data["status"] == true) {
+                    document.getElementsByClassName("TaskContainer")[0].removeChild(document.getElementById(taskId));
+                }
+            })
+            .catch((error) => {});
     }
 
     function FetchQuestion() {
@@ -254,11 +303,9 @@ if (isset($_POST["Submit"])) {
                     var category = document.createElement("option");
                     category.value = data["CategoryId"];
                     category.text = data["Name"];
-                    document.getElementById("Catagory").appendChild(category);
+                    document.getElementById("Category").appendChild(category);
                 })
-                .catch((error) => {
-                    console.error("Error HUISs:", error);
-                });
+                .catch((error) => {});
         }
     }
 </script>
