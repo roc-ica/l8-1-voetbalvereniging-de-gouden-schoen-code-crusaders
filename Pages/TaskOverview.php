@@ -4,6 +4,7 @@ session_start();
 if (isset($_POST["Submit"])) {
     $title = $_POST["Task"];
     $capacity = $_POST["Capacity"];
+    $category = $_POST["Category"];
     list($hours, $minutes) = explode(":", $_POST["StartTime"]);
     $startTimestamp = mktime($hours, $minutes);
     list($hours, $minutes) = explode(":", $_POST["EndTime"]);
@@ -16,11 +17,11 @@ if (isset($_POST["Submit"])) {
     var_dump($hours, $minutes, $seconds, $_POST["StartTime"], $_POST["EndTime"]);
     $duration = $hours . ":" . $minutes . ":" . $seconds;
 
-    $STMT = $conn->prepare("INSERT INTO `task`(`Title`, `Capacity`, `duration`) VALUES (?,?,?);");
+    $STMT = $conn->prepare("INSERT INTO `task`(`Title`, `Capacity`, `duration`, `Category_ID`) VALUES (?,?,?,?);");
     if ($STMT == false) {
         die("Secured");
     }
-    $RESULT = $STMT->bind_param("sis", $title, $capacity, $duration);
+    $RESULT = $STMT->bind_param("sisi", $title, $capacity, $duration, $category);
     if ($RESULT == false) {
         die("Secured");
     }
@@ -41,85 +42,138 @@ if (isset($_POST["Submit"])) {
     <link rel="stylesheet" href="../Media/CSS/header.css">
     <link rel="stylesheet" href="../Media/CSS/home.css">
     <link rel="stylesheet" href="../Media/CSS/TaskOverview.css">
+    <style>
+
+    </style>
     <title>De Gouden Schoen || Task Overview</title>
 </head>
 
 <body>
     <?php include "../Media/Templates/header.php" ?>
+    <section class="TaskSection">
+        <button class="buttonLogin" id="NewTask">New Task</button>
+        <div class="TaskContainer">
+            <?php
 
-    <?php
-    if (isset($_SESSION["email"])) :
-        if ($_SESSION["role"] == 2) :
-    ?>
-            <button class="liheader" id="NewTask">New Task</button>
-            <section class="SectionNewTask" id="SectionNewTask">
-                <div class="WrapperNewTask">
-                    <button class="CloseButton" id="NewTaskClose">X</button>
-                    <h3 class="SectionHeader">New Task</h3>
-                    <form action="" method="post" class="NewTaskForm" id="NewTaskForm">
-                        <label for="Task">
-                            Task:
-                            <input id="Task" type="text" name="Task" required>
-                        </label>
-                        <label for="Catagory">
-                            <select id="Catagory" name="Catagory" required>
-                                <?php
-                                $STMT = $conn->prepare("SELECT `Category_ID`, `Name` FROM `category`");
-                                $STMT->execute();
-                                $RESULT = $STMT->get_result();
-                                while ($row = $RESULT->fetch_array()) :?>
-                                    <option value="Catagory 1">Category 1</option>
-                                <?php endwhile ?>
-                                <option value="Catagory 2">Category 2</option>
-                                <option value="Catagory 3">Category 3</option>
-                                <option value="Catagory 4">Category 4</option>
-                                <option value="Catagory 5">Category 5</option>
-                                <option value="Catagory 6">Category 6</option>
-                            </select>
-                            <button type="button" class="AddCategoryButton" id="AddCategoryButton">Add Category</button>
-                        </label>
-                        <div class="NewTaskDateTime">
-                            <label for="StartTaskDate">
-                                Start task date:
-                                <input id="StartTaskDate" type="date" name="StartDate" required>
-                            </label>
-                            <label for="EndTaskDate">
-                                End task date:
-                                <input id="EndTaskDate" type="date" name="EndDate" required>
-                            </label>
-                            <label for="StartTaskTIme">
-                                Start task time:
-                                <input id="StartTaskTime" type="time" name="StartTime" required>
-                            </label>
-                            <label for="EndTaskTime">
-                                End task time:
-                                <input id="EndTaskTime" type="time" name="EndTime" required>
-                            </label>
-                        </div>
-                        <label for="TaskCapacity">
-                            Number of volunteers:
-                            <input id="TaskCapacity" type="number" min="0" name="Capacity" required />
-                        </label>
-                        <button id="NewTaskFormSubmit" type="submit">Create Task</button>
-                        <input id="hiddenSubmit" type="hidden" name="Submit">
-                    </form>
+            $STMT = $conn->prepare("SELECT * FROM `task`;");
+            if ($STMT == false) {
+                die("Secured");
+            }
+            $RESULT = $STMT->execute();
+            if ($RESULT == false) {
+                die("Secured");
+            }
+
+            $RESULT = $STMT->get_result();
+
+            while ($row = $RESULT->fetch_array()) : ?>
+
+                <div class="Tasks">
+                    <h3><?php echo $row["Title"] ?></h3>
+                    <?php if ($row["Description"] != null) : ?>
+                        <h4>Description</h4>
+                        <p><?php echo $row["Description"] ?></p>
+                    <?php endif ?>
+                    <h4>Capacity:</h4>
+                    <p><?php echo $row["Capacity"] ?></p>
+                    <h4>Category:</h4>
+                    <p>
+                        <?php
+                        $STMT = $conn->prepare("SELECT `Category_ID`, `Name` FROM `category` WHERE `Category_ID` = ?");
+                        if ($STMT == false) {
+                            die("Secured");
+                        }
+
+                        $RESULT2 = $STMT->bind_param('s', $row["Category_ID"]);
+                        if ($RESULT2 == false) {
+                            die("Secured");
+                        }
+
+                        $RESULT2 = $STMT->execute();
+                        if ($RESULT2 == false) {
+                            die("Secured");
+                        }
+
+                        $RESULT2 = $STMT->get_result();
+
+                        while ($row2 = $RESULT2->fetch_array()) {
+                            echo $row2["Name"];
+                        }
+                        ?>
+                    </p>
+                    <button class="buttonLogin DeleteButton" value="<?php echo $row["Task_ID"] ?>">Delete task</button>
                 </div>
-            </section>
-            <section class="SectionNewCategory" id="SectionNewCategory">
-                <div class="WrapperNewCategory">
-                    <button class="CloseButton" id="NewCategoryClose">X</button>
-                    <h3 class="SectionHeader">New Category</h3>
-                    <form class="NewCategoryForm" id="NewCategoryForm">
-                        <label for="Category">
-                            Category:
-                            <input id="NewCategory" type="text" name="Category" required>
-                        </label>
-                        <button type="button" id="NewCategoryFormSubmit" type="submit">Create Category</button>
-                    </form>
-                </div>
-            </section>
+
+            <?php endwhile ?>
+        </div>
+        <?php
+        if (isset($_SESSION["email"])) :
+            if ($_SESSION["role"] == 2) :
+        ?>
+                <section class="SectionNewTask" id="SectionNewTask">
+                    <div class="WrapperNewTask">
+                        <button class="CloseButton" id="NewTaskClose">X</button>
+                        <h3 class="SectionHeader">New Task</h3>
+                        <form action="" method="post" class="NewTaskForm" id="NewTaskForm">
+                            <label for="Task">
+                                Task:
+                                <input id="Task" type="text" name="Task" required>
+                            </label>
+                            <label for="Catagory">
+                                <select id="Category" name="Category" required>
+                                    <?php
+                                    $STMT = $conn->prepare("SELECT `Category_ID`, `Name` FROM `category`");
+                                    $STMT->execute();
+                                    $RESULT = $STMT->get_result();
+                                    while ($row = $RESULT->fetch_array()) : ?>
+                                        <option value="<?php echo $row["Category_ID"] ?>"><?php echo $row["Name"] ?></option>
+                                    <?php endwhile ?>
+                                </select>
+                                <button type="button" class="AddCategoryButton" id="AddCategoryButton">Add Category</button>
+                            </label>
+                            <div class="NewTaskDateTime">
+                                <label for="StartTaskDate">
+                                    Start task date:
+                                    <input id="StartTaskDate" type="date" name="StartDate" required>
+                                </label>
+                                <label for="EndTaskDate">
+                                    End task date:
+                                    <input id="EndTaskDate" type="date" name="EndDate" required>
+                                </label>
+                                <label for="StartTaskTIme">
+                                    Start task time:
+                                    <input id="StartTaskTime" type="time" name="StartTime" required>
+                                </label>
+                                <label for="EndTaskTime">
+                                    End task time:
+                                    <input id="EndTaskTime" type="time" name="EndTime" required>
+                                </label>
+                            </div>
+                            <label for="TaskCapacity">
+                                Number of volunteers:
+                                <input id="TaskCapacity" type="number" min="0" name="Capacity" required />
+                            </label>
+                            <button id="NewTaskFormSubmit" type="submit">Create Task</button>
+                            <input id="hiddenSubmit" type="hidden" name="Submit">
+                        </form>
+                    </div>
+                </section>
+                <section class="SectionNewCategory" id="SectionNewCategory">
+                    <div class="WrapperNewCategory">
+                        <button class="CloseButton" id="NewCategoryClose">X</button>
+                        <h3 class="SectionHeader">New Category</h3>
+                        <form class="NewCategoryForm" id="NewCategoryForm">
+                            <label for="Category">
+                                Category:
+                                <input id="NewCategory" type="text" name="Category" required>
+                            </label>
+                            <button type="button" id="NewCategoryFormSubmit" type="submit">Create Category</button>
+                        </form>
+                    </div>
+                </section>
+            <?php endif ?>
         <?php endif ?>
-    <?php endif ?>
+    </section>
 </body>
 
 <script>
@@ -158,6 +212,29 @@ if (isset($_POST["Submit"])) {
         document.getElementById("SectionNewCategory").style.display = "flex";
 
     })
+    size_check();
+
+    document.getElementsByTagName("BODY")[0].onresize = function() {
+        size_check();
+    };
+
+    var deleteButtons = document.getElementsByClassName("DeleteButton");
+    console.log(deleteButtons);
+
+    for (let index = 0; index < deleteButtons.length; index++) {
+        deleteButtons[index].addEventListener("click", function() {
+            console.log(this.value);
+        })
+    };
+    
+
+    function size_check() {
+        var r = document.querySelector(':root');
+        var rect = document.getElementsByTagName("header")[0].getBoundingClientRect()
+
+        var headerSize = Math.ceil(rect.height);
+        r.style.setProperty('--Header-Height', headerSize + 'px');
+    }
 
     function FetchQuestion() {
         const value = document.getElementById("NewCategory").value;
