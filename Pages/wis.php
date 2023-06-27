@@ -1,4 +1,10 @@
 <?php
+session_start();
+
+if (!(isset($_SESSION['sessionid']) || $_SESSION['sessionid'] == session_id() || $_SESSION['role'] == 2)) {
+    header("location: index.php");
+}
+
 include '../Media/Templates/DBConnect.php';
 
 if (isset($_GET['wisid'])) {
