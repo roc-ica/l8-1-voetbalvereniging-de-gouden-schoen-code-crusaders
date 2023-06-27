@@ -56,7 +56,7 @@ if (isset($_POST["Submit"])) {
         if (isset($_SESSION["email"])) :
             if ($_SESSION["role"] == 2) :
         ?>
-                <button class="buttonLogin" id="NewTask">New Task</button>
+                <button class="buttonLogin NewTaskButton" id="NewTask">New Task</button>
             <?php endif ?>
         <?php endif ?>
         <div class="TaskContainer">
@@ -146,7 +146,6 @@ if (isset($_POST["Submit"])) {
                 <section class="SectionNewTask" id="SectionNewTask">
                     <div class="WrapperNewTask">
                         <button class="CloseButton" id="NewTaskClose">X</button>
-                        <h3 class="SectionHeader">New Task</h3>
                         <form action="" method="post" class="NewTaskForm" id="NewTaskForm">
                             <label for="Task">
                                 Task:
@@ -161,22 +160,22 @@ if (isset($_POST["Submit"])) {
                                     while ($row = $RESULT->fetch_array()) : ?>
                                         <option value="<?php echo $row["Category_ID"] ?>"><?php echo $row["Name"] ?></option>
                                     <?php endwhile ?>
-                                </select>
+                                </select> <br />
                                 <button type="button" class="AddCategoryButton" id="AddCategoryButton">Add Category</button>
                             </label>
                             <div class="NewTaskDateTime">
                                 <label for="StartTaskDate">
                                     Start task date:
                                     <input id="StartTaskDate" type="date" name="StartDate" required>
-                                </label>
+                                </label> <br />
                                 <label for="EndTaskDate">
                                     End task date:
                                     <input id="EndTaskDate" type="date" name="EndDate" required>
-                                </label>
+                                </label> <br />
                                 <label for="StartTaskTIme">
                                     Start task time:
                                     <input id="StartTaskTime" type="time" name="StartTime" required>
-                                </label>
+                                </label> <br />
                                 <label for="EndTaskTime">
                                     End task time:
                                     <input id="EndTaskTime" type="time" name="EndTime" required>

@@ -1,12 +1,13 @@
 <?php
 include '../Media/Templates/DBConnect.php';
+include '../Media/Templates/header.php';
 session_start();
 
 if (!(isset($_SESSION['sessionid']) || $_SESSION['sessionid'] == session_id() || $_SESSION['role'] == 2)) {
     header("location: index.php");
 }
 
-var_dump($_SESSION) ;
+// var_dump($_SESSION) ;
 
 if (isset($_GET['wisid'])) {
     $id = $_GET['wisid'];
@@ -30,6 +31,12 @@ if (isset($_GET['wisid'])) {
     <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@200&family=Roboto&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/5622272db3.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../Media/CSS/UserOverview.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@200&family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../Media/CSS/main.css">
+    <link rel="stylesheet" href="../Media/CSS/header.css">
+    <link rel="stylesheet" href="../Media/CSS/home.css">
     <title>De Gouden Schoen || User Overview</title>
 </head>
 

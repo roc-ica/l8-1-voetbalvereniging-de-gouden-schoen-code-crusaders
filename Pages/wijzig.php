@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+include "../Media/Templates/header.php";
+
 if (!(isset($_SESSION['sessionid']) || $_SESSION['sessionid'] == session_id() || $_SESSION['role'] == 2)) {
     header("location: index.php");
 }
@@ -50,6 +52,14 @@ if (isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Aanpassen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@200&family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../Media/CSS/main.css">
+    <link rel="stylesheet" href="../Media/CSS/header.css">
+    <link rel="stylesheet" href="../Media/CSS/home.css">
+    <link rel="stylesheet" href="../Media/CSS/wijzig.css">
+
 </head>
 
 <body>
@@ -74,8 +84,11 @@ if (isset($_POST['submit'])) {
             </select>
         </div>
         <input type="hidden" name="uid" value=<?php echo $user_ID; ?>>
-        <input type="submit" name="submit" value="opslaan">
+        <input class="opslaan" type="submit" name="submit" value="opslaan">
     </form>
 </body>
 
 </html>
+
+
+

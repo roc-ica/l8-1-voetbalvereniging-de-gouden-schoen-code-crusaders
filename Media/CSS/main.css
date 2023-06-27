@@ -30,6 +30,11 @@ a.dark-mode {
     color: #ffffff;
 }
 
+.dark-mode .card {
+    background-color: #333333;
+    color: #ffffff !important;
+}
+
 body.dark-mode .buttonLogin {
     background-color: #ffffff;
     color: #222222;

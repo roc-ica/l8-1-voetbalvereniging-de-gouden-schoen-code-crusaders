@@ -1,0 +1,25 @@
+
+* {
+    font-family: 'Geologica', sans-serif;
+}
+
+.card {
+    background: white;
+    width: 300px;
+    display: inline-flex;
+    margin: 30px;
+    border-radius: 10px;
+    height: 200px;
+    flex-direction: column; /* Added to display paragraphs beneath each other */
+    justify-content: center; /* Added to center align the paragraphs vertically */
+    align-items: center; /* Added to center align the paragraphs horizontally */
+}
+
+p {
+    margin: 10px 0; /* Added margin for spacing between paragraphs */
+}
+
+.title {
+    font-weight: bold;
+    font-size: x-large;
+}
