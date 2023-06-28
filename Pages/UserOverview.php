@@ -1,8 +1,8 @@
 <?php
 include '../Media/Templates/DBConnect.php';
-include '../Media/Templates/header.php';
-session_start();
 
+session_start();
+include '../Media/Templates/header.php';
 if (!(isset($_SESSION['sessionid']) || $_SESSION['sessionid'] == session_id() || $_SESSION['role'] == 2)) {
     header("location: index.php");
 }

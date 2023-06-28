@@ -46,7 +46,7 @@ if (isset($_POST["Submit"])) {
     <style>
 
     </style>
-    <title>De Gouden Schoen || Taak Overzicht</title>
+    <title>De Gouden Schoen || Taken Overzicht</title>
 </head>
 
 <body>
@@ -78,7 +78,7 @@ if (isset($_POST["Submit"])) {
                 <div class="Tasks" id="<?php echo $row["Task_ID"] ?>">
                     <h3><?php echo $row["Title"] ?></h3>
                     <?php if ($row["Description"] != null) : ?>
-                        <h4>Omschrijfing:</h4>
+                        <h4>Omschrijving:</h4>
                         <p><?php echo $row["Description"] ?></p>
                     <?php endif ?>
                     <h4>Hoeveelheid vrijwilligers:</h4>
@@ -111,7 +111,7 @@ if (isset($_POST["Submit"])) {
                     <div>
                         <h4>Tijd</h4>
                         <div>
-                            <h5>Begin datum</h5>
+                            <h5>Startdatum</h5>
                             <div>
                                 <?php
                                 $datetime = explode(" ", $row["StartDate"]);
@@ -121,7 +121,7 @@ if (isset($_POST["Submit"])) {
                                     </p>
                                 <?php endfor ?>
                             </div>
-                            <h5>Eind datum</h5>
+                            <h5>Einddatum</h5>
                             <div>
                                 <?php
                                 $datetime = explode(" ", $row["EndDate"]);
@@ -135,7 +135,7 @@ if (isset($_POST["Submit"])) {
                     </div>
                     <form method="post" action="EditTask.php">
                         <button class="buttonLogin DeleteButton" type="button" value="<?php echo $row["Task_ID"] ?>">Verwijder taak</button>
-                        <button class="buttonLogin" type="submit" name="submitId" value="<?php echo $row["Task_ID"] ?>">Verrander taak</button>
+                        <button class="buttonLogin" type="submit" name="submitId" value="<?php echo $row["Task_ID"] ?>">Verander taak</button>
                     </form>
                 </div>
 
@@ -167,19 +167,19 @@ if (isset($_POST["Submit"])) {
                             </label>
                             <div class="NewTaskDateTime">
                                 <label for="StartTaskDate">
-                                    Start taak dag:
+                                    Startdag taag:
                                     <input id="StartTaskDate" type="date" name="StartDate" required>
                                 </label> <br />
                                 <label for="EndTaskDate">
-                                    Eind taak dag:
+                                    Einddag taak:
                                     <input id="EndTaskDate" type="date" name="EndDate" required>
                                 </label> <br />
                                 <label for="StartTaskTIme">
-                                    Start taak tijd:
+                                    Starttijd taak:
                                     <input id="StartTaskTime" type="time" name="StartTime" required>
                                 </label> <br />
                                 <label for="EndTaskTime">
-                                    Eind taak tijd:
+                                    Eindtijd taak:
                                     <input id="EndTaskTime" type="time" name="EndTime" required>
                                 </label>
                             </div>
@@ -187,7 +187,7 @@ if (isset($_POST["Submit"])) {
                                 Hoeveelheid vrijwilligers:
                                 <input id="TaskCapacity" type="number" min="0" name="Capacity" required />
                             </label>
-                            <button id="NewTaskFormSubmit" type="submit">Creëer Taak</button>
+                            <button id="NewTaskFormSubmit" type="submit">Taak aanmaken</button>
                             <input id="hiddenSubmit" type="hidden" name="Submit">
                         </form>
                     </div>
@@ -201,7 +201,7 @@ if (isset($_POST["Submit"])) {
                                 Categorie:
                                 <input id="NewCategory" type="text" name="Category" required>
                             </label>
-                            <button type="button" id="NewCategoryFormSubmit" type="submit">Creëer categorie</button>
+                            <button type="button" id="NewCategoryFormSubmit" type="submit">Categorie aanmaken</button>
                         </form>
                     </div>
                 </section>

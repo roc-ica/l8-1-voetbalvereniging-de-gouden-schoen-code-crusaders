@@ -4,7 +4,7 @@
 <header>
     <h1 class="Logo-Header">De <span class="gold">Gouden</span> schoen</h1>
     <ul class="ulheader">
-        <li class="liheader"><a class="headerLink" href="../Pages/index.php">Start pagina</a></li>
+        <li class="liheader"><a class="headerLink" href="../Pages/index.php">Startpagina</a></li>
         <li class="liheader"><a class="headerLink" href="../Pages/mytasks.php">Agenda</a></li>
         <li class="liheader"><a class="headerLink" href="../Pages/TaskSignup.php">Taak toewijzen</a></li>
         <?php
@@ -24,10 +24,10 @@
             </a>
             <?php else : if ($_SESSION["role"] == 2) : ?>
                 <div class="AdminDropdown">
-                    <button class="buttonLogin DropdownButton">gebruiker instellingen</button>
+                    <button class="buttonLogin DropdownButton">Gebruikersinstellingen</button>
                     <div class="AdminDropdownContent">
-                        <a class="DropdownContent" href="../Pages/UserOverview.php">gebruikers</a>
-                        <a class="DropdownContent" href="../Media/Templates/Logout.php">uitloggen</a>
+                        <a class="DropdownContent" href="../Pages/UserOverview.php">Gebruikers</a>
+                        <a class="DropdownContent" href="../Media/Templates/Logout.php">Uitloggen</a>
                     </div>
                 </div>
             <?php else : ?>
