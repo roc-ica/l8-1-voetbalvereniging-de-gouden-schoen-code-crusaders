@@ -18,7 +18,7 @@ session_start();
 <body>
 
     <?php include "../Media/Templates/header.php";
-          include "../Media/Templates/DBConnect.php";
+    include "../Media/Templates/DBConnect.php";
     ?>
 
 

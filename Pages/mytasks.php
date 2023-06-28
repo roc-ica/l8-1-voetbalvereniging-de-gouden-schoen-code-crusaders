@@ -57,79 +57,80 @@ if (isset($_POST['submit'])) {
                 $result2 = $stmt2->get_result();
                 while ($row3 = $result2->fetch_array()) {
 
-                if ($row3["User_ID"] == $_SESSION['uid'] && new DateTime() < new DateTime($row['EndDate'])) {
+                    if ($row3["User_ID"] == $_SESSION['uid'] && new DateTime() < new DateTime($row['EndDate'])) {
 
             ?>
 
-                    <div class="Tasks" id="<?php echo $row["Task_ID"] ?>">
-                        <h3><?php echo $row["Title"] ?></h3>
-                        <?php if ($row["Description"] != null) : ?>
-                            <h4>Description</h4>
-                            <p><?php echo $row["Description"] ?></p>
-                        <?php endif ?>
-                        <h4>Capacity:</h4>
-                        <p><?php echo $row["Capacity"] ?></p>
-                        <h4>Category:</h4>
-                        <p>
-                            <?php
-                            $STMT = $conn->prepare("SELECT `Category_ID`, `Name` FROM `category` WHERE `Category_ID` = ?");
-                            if ($STMT == false) {
-                                die("Secured");
-                            }
+                        <div class="Tasks" id="<?php echo $row["Task_ID"] ?>">
+                            <h3><?php echo $row["Title"] ?></h3>
+                            <?php if ($row["Description"] != null) : ?>
+                                <h4>Description</h4>
+                                <p><?php echo $row["Description"] ?></p>
+                            <?php endif ?>
+                            <h4>Capacity:</h4>
+                            <p><?php echo $row["Capacity"] ?></p>
+                            <h4>Category:</h4>
+                            <p>
+                                <?php
+                                $STMT = $conn->prepare("SELECT `Category_ID`, `Name` FROM `category` WHERE `Category_ID` = ?");
+                                if ($STMT == false) {
+                                    die("Secured");
+                                }
 
-                            $RESULT2 = $STMT->bind_param('s', $row["Category_ID"]);
-                            if ($RESULT2 == false) {
-                                die("Secured");
-                            }
+                                $RESULT2 = $STMT->bind_param('s', $row["Category_ID"]);
+                                if ($RESULT2 == false) {
+                                    die("Secured");
+                                }
 
-                            $RESULT2 = $STMT->execute();
-                            if ($RESULT2 == false) {
-                                die("Secured");
-                            }
+                                $RESULT2 = $STMT->execute();
+                                if ($RESULT2 == false) {
+                                    die("Secured");
+                                }
 
-                            $RESULT2 = $STMT->get_result();
+                                $RESULT2 = $STMT->get_result();
 
-                            while ($row2 = $RESULT2->fetch_array()) {
-                                echo $row2["Name"];
-                            }
-                            ?>
-                        </p>
-                        <div>
-                            <h4>Time</h4>
+                                while ($row2 = $RESULT2->fetch_array()) {
+                                    echo $row2["Name"];
+                                }
+                                ?>
+                            </p>
                             <div>
-                                <h5>Start date</h5>
+                                <h4>Time</h4>
                                 <div>
-                                    <?php
-                                    $datetime = explode(" ", $row["StartDate"]);
-                                    for ($i = 0; $i < count($datetime); $i++) : ?>
-                                        <p>
-                                            <?php echo $datetime[$i] ?>
-                                        </p>
-                                    <?php endfor ?>
-                                </div>
-                                <h5>End date</h5>
-                                <div>
-                                    <?php
-                                    $datetime = explode(" ", $row["EndDate"]);
-                                    for ($i = 0; $i < count($datetime); $i++) : ?>
-                                        <p>
-                                            <?php echo $datetime[$i] ?>
-                                        </p>
-                                    <?php endfor ?>
+                                    <h5>Start date</h5>
+                                    <div>
+                                        <?php
+                                        $datetime = explode(" ", $row["StartDate"]);
+                                        for ($i = 0; $i < count($datetime); $i++) : ?>
+                                            <p>
+                                                <?php echo $datetime[$i] ?>
+                                            </p>
+                                        <?php endfor ?>
+                                    </div>
+                                    <h5>End date</h5>
+                                    <div>
+                                        <?php
+                                        $datetime = explode(" ", $row["EndDate"]);
+                                        for ($i = 0; $i < count($datetime); $i++) : ?>
+                                            <p>
+                                                <?php echo $datetime[$i] ?>
+                                            </p>
+                                        <?php endfor ?>
+                                    </div>
                                 </div>
                             </div>
+
+                            <?php if (new DateTime('now+1day') < new DateTime($row['StartDate'])) { ?>
+                                <form action="" method="post">
+                                    <input type="hidden" name="id" value=<?php echo $row3['User_Task_ID'] ?>></input>
+
+                                    <button class="buttonLogin DeleteButton" type="submit" name="submit">cancel task</button>
+                                </form>
+
+                            <?php } ?>
                         </div>
-
-                        <?php if(new DateTime('now+1day') < new DateTime($row['StartDate'])) { ?>
-                        <form action="" method="post">
-                            <input type="hidden" name="id" value=<?php echo $row3['User_Task_ID'] ?>></input>
-
-                            <button class="buttonLogin DeleteButton" type="submit" name="submit">cancel task</button>
-                        </form>
-                    
-            <?php } ?>
-            </div>
-            <?php }}
+            <?php }
+                }
             endwhile ?>
         </div>
     </section>

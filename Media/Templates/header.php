@@ -2,11 +2,18 @@
     <link rel="stylesheet" href="../css/header.css">
 </head>
 <header>
-    <h1 class="Logo-Header">De <span class="gold">Gouden</span>schoen</h1>
+    <h1 class="Logo-Header">De <span class="gold">Gouden</span> schoen</h1>
     <ul class="ulheader">
         <li class="liheader"><a class="headerLink" href="../Pages/index.php">Home</a></li>
         <li class="liheader"><a class="headerLink" href="../Pages/mytasks.php">Agenda</a></li>
-        <li class="liheader">Contact</li>
+        <li class="liheader"><a class="headerLink" href="../Pages/TaskSignup.php">Asign tasks</a></li>
+        <?php
+        if (isset($_SESSION["email"])) :
+            if ($_SESSION["role"] == 2) :
+        ?>
+                <li class="liheader"><a class="headerLink" href="../Pages/TaskOverview.php">Task overview</a></li>
+            <?php endif ?>
+        <?php endif ?>
     </ul>
     <div class="Login-Header">
         <?php

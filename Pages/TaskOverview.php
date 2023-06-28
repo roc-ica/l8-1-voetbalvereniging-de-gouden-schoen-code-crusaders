@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!(isset($_SESSION['sessionid']) || $_SESSION['sessionid'] == session_id() || $_SESSION['role'] == 2)) {
+if ((!isset($_SESSION['sessionid']) || $_SESSION['sessionid'] == session_id()) && !$_SESSION['role'] == 2) {
     header("location: index.php");
 }
 include "../Media/Templates/DBConnect.php";
@@ -133,7 +133,10 @@ if (isset($_POST["Submit"])) {
                             </div>
                         </div>
                     </div>
-                    <button class="buttonLogin DeleteButton" value="<?php echo $row["Task_ID"] ?>">Delete task</button>
+                    <form method="post" action="EditTask.php">
+                        <button class="buttonLogin DeleteButton" type="button" value="<?php echo $row["Task_ID"] ?>">Delete task</button>
+                        <button class="buttonLogin" type="submit" name="submitId" value="<?php echo $row["Task_ID"] ?>">Edit task</button>
+                    </form>
                 </div>
 
             <?php endwhile ?>
@@ -209,15 +212,20 @@ if (isset($_POST["Submit"])) {
 
 <script>
     var taskForm = document.getElementById("NewTaskForm");
+    var deleteButtons = document.getElementsByClassName("DeleteButton");
+
     document.getElementById("NewTask").addEventListener("click", function() {
         document.getElementById("SectionNewTask").style.display = "flex";
     });
+
     document.getElementById("NewTaskClose").addEventListener("click", function() {
         document.getElementById("SectionNewTask").style.display = "none";
     });
+
     document.getElementById("NewCategoryClose").addEventListener("click", function() {
         document.getElementById("SectionNewCategory").style.display = "none";
     });
+
     taskForm.addEventListener("submit", function(e) {
         var dateCorrect = false;
         var timeCorrect = false;
@@ -236,27 +244,27 @@ if (isset($_POST["Submit"])) {
             taskForm.submit();
         }
     })
+
     document.getElementById("NewCategoryFormSubmit").addEventListener("click", function() {
-        FetchQuestion();
+        CreateCategory();
     });
+
     document.getElementById("AddCategoryButton").addEventListener("click", function() {
         document.getElementById("SectionNewCategory").style.display = "flex";
-
     })
+
     size_check();
 
     document.getElementsByTagName("BODY")[0].onresize = function() {
         size_check();
     };
 
-    var deleteButtons = document.getElementsByClassName("DeleteButton");
 
     for (let index = 0; index < deleteButtons.length; index++) {
         deleteButtons[index].addEventListener("click", function() {
             DeleteTask(this.value);
         })
     };
-
 
     function size_check() {
         var r = document.querySelector(':root');
@@ -286,7 +294,7 @@ if (isset($_POST["Submit"])) {
             .catch((error) => {});
     }
 
-    function FetchQuestion() {
+    function CreateCategory() {
         const value = document.getElementById("NewCategory").value;
         const data = {
             category: value
