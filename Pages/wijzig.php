@@ -11,20 +11,20 @@ if (!(isset($_SESSION['sessionid']) || $_SESSION['sessionid'] == session_id() ||
 include '../Media/Templates/DBConnect.php';
 
 
-if (isset($_GET['wijzigid'])){
-$user_ID = $_GET['wijzigid'];
+if (isset($_GET['wijzigid'])) {
+    $user_ID = $_GET['wijzigid'];
 
-$sql = "SELECT * FROM `user` WHERE user_ID = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param('s', $user_ID);
-$stmt->execute();
-$result = $stmt->get_result();
-while ($row = $result->fetch_array()) {
-$FirstName = $row['FirstName'];
-$LastName = $row['LastName'];
-$Email = $row['Email'];
-$Role = $row['Role'];
-}
+    $sql = "SELECT * FROM `user` WHERE user_ID = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('s', $user_ID);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_array()) {
+        $FirstName = $row['FirstName'];
+        $LastName = $row['LastName'];
+        $Email = $row['Email'];
+        $Role = $row['Role'];
+    }
 }
 
 if (isset($_POST['submit'])) {
@@ -39,8 +39,6 @@ if (isset($_POST['submit'])) {
     $stmt->bind_param('sssss', $FirstName, $LastName, $Email, $Role, $user_ID);
     $stmt->execute();
     header('Location: UserOverview.php');
-
-
 }
 
 ?>
@@ -65,22 +63,28 @@ if (isset($_POST['submit'])) {
 <body>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
         <div class="FirstName">
-            <input type="text" class="FirstName" id="FirstName" name="FirstName" placeholder="FirstName" value=<?php echo $FirstName; ?>>
+            <input type="text" class="FirstName" id="FirstName" name="FirstName" placeholder="FirstName" value="<?php echo $FirstName; ?>">
         </div>
         <br>
         <div class="LastName">
-            <input type="text" class="LastName" id="LastName" name="LastName" placeholder="LastName" value=<?php echo $LastName; ?>>
+            <input type="text" class="LastName" id="LastName" name="LastName" placeholder="LastName" value="<?php echo $LastName ?>">
         </div>
         <br>
         <div class="Email">
-            <input type="text" class="Email" id="Email" name="Email" placeholder="Email" value=<?php echo $Email; ?>>
+            <input type="text" class="Email" id="Email" name="Email" placeholder="Email" value="<?php echo $Email; ?>">
         </div>
         <br>
         <div class="Rol">
             <select name="rol" id="rol">
-                <option <?php if($Role == '0'){echo("selected");}?> value="0">Inactief</option>
-                <option <?php if($Role == '1'){echo("selected");}?> value="1">Gebruiker</option>
-                <option <?php if($Role == '2'){echo("selected");}?> value="2">Admin</option>
+                <option <?php if ($Role == '0') {
+                            echo ("selected");
+                        } ?> value="0">Inactief</option>
+                <option <?php if ($Role == '1') {
+                            echo ("selected");
+                        } ?> value="1">Gebruiker</option>
+                <option <?php if ($Role == '2') {
+                            echo ("selected");
+                        } ?> value="2">Admin</option>
             </select>
         </div>
         <input type="hidden" name="uid" value=<?php echo $user_ID; ?>>
@@ -89,6 +93,3 @@ if (isset($_POST['submit'])) {
 </body>
 
 </html>
-
-
-

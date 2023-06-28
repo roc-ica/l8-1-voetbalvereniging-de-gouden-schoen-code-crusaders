@@ -1,7 +1,7 @@
 <?php
+session_start();
 include '../Media/Templates/DBConnect.php';
 include '../Media/Templates/header.php';
-session_start();
 
 if (!(isset($_SESSION['sessionid']) || $_SESSION['sessionid'] == session_id() || $_SESSION['role'] == 2)) {
     header("location: index.php");
@@ -55,29 +55,27 @@ if (isset($_GET['wisid'])) {
                     </tr>
                 </thead>
                 <tbody>
-                <?php
-            include "../Media/Templates/DBConnect.php";
-            $sql = "SELECT * FROM `user`";
-            $result = $conn->query($sql);
+                    <?php
+                    include "../Media/Templates/DBConnect.php";
+                    $sql = "SELECT * FROM `user`";
+                    $result = $conn->query($sql);
 
-            if ($result) {
-                while ($row = $result->fetch_object()) {
-                    $user_ID = $row->user_ID;
-                    $FirstName = $row->FirstName;
-                    $LastName = $row->LastName;
-                    $Email = $row->Email;
-                    $Role = $row->Role;
-                    if ($Role == 0) {
-                        $Role = "inactief";
-                    }
-                    else if ($Role == 1) {
-                        $Role = "gebruiker";
-                    }
-                    else if ($Role == 2) {
-                        $Role = "admin";
-                    }
+                    if ($result) {
+                        while ($row = $result->fetch_object()) {
+                            $user_ID = $row->user_ID;
+                            $FirstName = $row->FirstName;
+                            $LastName = $row->LastName;
+                            $Email = $row->Email;
+                            $Role = $row->Role;
+                            if ($Role == 0) {
+                                $Role = "inactief";
+                            } else if ($Role == 1) {
+                                $Role = "gebruiker";
+                            } else if ($Role == 2) {
+                                $Role = "admin";
+                            }
 
-                    echo '<tr class="actief">
+                            echo '<tr class="actief">
                     <th scope="row">' . $user_ID . '</th>
                     <td data-label="Voornaam: ">' . $FirstName . '</td>
                     <td data-label="Achternaam: ">' . $LastName . '</td>
@@ -91,10 +89,10 @@ if (isset($_GET['wisid'])) {
                     </td>
                 
                     </tr>';
-                }
-            }
+                        }
+                    }
 
-            ?>
+                    ?>
                 </tbody>
             </table>
         </div>
@@ -106,6 +104,6 @@ if (isset($_GET['wisid'])) {
             window.location.href = "wis.php?wisid=" + user_ID;
         }
     }
-
 </script>
+
 </html>
