@@ -29,7 +29,7 @@ if (isset($_POST['submit'])) {
     <style>
 
     </style>
-    <title>De Gouden Schoen || Task Signup</title>
+    <title>De Gouden Schoen || Taak Aanmelden</title>
 </head>
 
 <body>
@@ -68,12 +68,12 @@ if (isset($_POST['submit'])) {
                         <div class="Tasks" id="<?php echo $row["Task_ID"] ?>">
                             <h3><?php echo $row["Title"] ?></h3>
                             <?php if ($row["Description"] != null) : ?>
-                                <h4>Description</h4>
+                                <h4>Beschrijving</h4>
                                 <p><?php echo $row["Description"] ?></p>
                             <?php endif ?>
-                            <h4>Capacity:</h4>
+                            <h4>Hoeveelheid vrijwilligers:</h4>
                             <p><?php echo $row["Capacity"] ?></p>
-                            <h4>Category:</h4>
+                            <h4>Categorie:</h4>
                             <p>
                                 <?php
                                 $STMT = $conn->prepare("SELECT `Category_ID`, `Name` FROM `category` WHERE `Category_ID` = ?");
@@ -99,9 +99,9 @@ if (isset($_POST['submit'])) {
                                 ?>
                             </p>
                             <div>
-                                <h4>Time</h4>
+                                <h4>Tijd</h4>
                                 <div>
-                                    <h5>Start date</h5>
+                                    <h5>Startdatum</h5>
                                     <div>
                                         <?php
                                         $datetime = explode(" ", $row["StartDate"]);
@@ -111,7 +111,7 @@ if (isset($_POST['submit'])) {
                                             </p>
                                         <?php endfor ?>
                                     </div>
-                                    <h5>End date</h5>
+                                    <h5>Einddatum</h5>
                                     <div>
                                         <?php
                                         $datetime = explode(" ", $row["EndDate"]);
@@ -126,7 +126,7 @@ if (isset($_POST['submit'])) {
                             <form action="" method="post">
                                 <input type="hidden" name="id" value=<?php echo $row['Task_ID'] ?>></input>
 
-                                <button class="buttonLogin DeleteButton" type="submit" name="submit">claim task</button>
+                                <button class="buttonLogin DeleteButton" type="submit" name="submit">Aanmelden voor deze taak</button>
                             </form>
                         </div>
             <?php }
