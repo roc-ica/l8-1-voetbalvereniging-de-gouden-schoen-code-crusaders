@@ -46,7 +46,7 @@ if (isset($_POST["Submit"])) {
     <style>
 
     </style>
-    <title>De Gouden Schoen || Task Overview</title>
+    <title>De Gouden Schoen || Taak Overzicht</title>
 </head>
 
 <body>
@@ -56,7 +56,7 @@ if (isset($_POST["Submit"])) {
         if (isset($_SESSION["role"])) :
             if ($_SESSION["role"] == 2) :
         ?>
-                <button class="buttonLogin NewTaskButton" id="NewTask">New Task</button>
+                <button class="buttonLogin NewTaskButton" id="NewTask">Nieuwe Taak</button>
             <?php endif ?>
         <?php endif ?>
         <div class="TaskContainer">
@@ -78,12 +78,12 @@ if (isset($_POST["Submit"])) {
                 <div class="Tasks" id="<?php echo $row["Task_ID"] ?>">
                     <h3><?php echo $row["Title"] ?></h3>
                     <?php if ($row["Description"] != null) : ?>
-                        <h4>Description</h4>
+                        <h4>Omschrijfing:</h4>
                         <p><?php echo $row["Description"] ?></p>
                     <?php endif ?>
-                    <h4>Capacity:</h4>
+                    <h4>Hoeveelheid vrijwilligers:</h4>
                     <p><?php echo $row["Capacity"] ?></p>
-                    <h4>Category:</h4>
+                    <h4>Categorie:</h4>
                     <p>
                         <?php
                         $STMT = $conn->prepare("SELECT `Category_ID`, `Name` FROM `category` WHERE `Category_ID` = ?");
@@ -109,9 +109,9 @@ if (isset($_POST["Submit"])) {
                         ?>
                     </p>
                     <div>
-                        <h4>Time</h4>
+                        <h4>Tijd</h4>
                         <div>
-                            <h5>Start date</h5>
+                            <h5>Begin datum</h5>
                             <div>
                                 <?php
                                 $datetime = explode(" ", $row["StartDate"]);
@@ -121,7 +121,7 @@ if (isset($_POST["Submit"])) {
                                     </p>
                                 <?php endfor ?>
                             </div>
-                            <h5>End date</h5>
+                            <h5>Eind datum</h5>
                             <div>
                                 <?php
                                 $datetime = explode(" ", $row["EndDate"]);
@@ -134,8 +134,8 @@ if (isset($_POST["Submit"])) {
                         </div>
                     </div>
                     <form method="post" action="EditTask.php">
-                        <button class="buttonLogin DeleteButton" type="button" value="<?php echo $row["Task_ID"] ?>">Delete task</button>
-                        <button class="buttonLogin" type="submit" name="submitId" value="<?php echo $row["Task_ID"] ?>">Edit task</button>
+                        <button class="buttonLogin DeleteButton" type="button" value="<?php echo $row["Task_ID"] ?>">Verwijder taak</button>
+                        <button class="buttonLogin" type="submit" name="submitId" value="<?php echo $row["Task_ID"] ?>">Verrander taak</button>
                     </form>
                 </div>
 
@@ -150,7 +150,7 @@ if (isset($_POST["Submit"])) {
                         <button class="CloseButton" id="NewTaskClose">X</button>
                         <form action="" method="post" class="NewTaskForm" id="NewTaskForm">
                             <label for="Task">
-                                Task:
+                                Taak:
                                 <input id="Task" type="text" name="Task" required>
                             </label>
                             <label for="Category">
@@ -163,31 +163,31 @@ if (isset($_POST["Submit"])) {
                                         <option value="<?php echo $row["Category_ID"] ?>"><?php echo $row["Name"] ?></option>
                                     <?php endwhile ?>
                                 </select> <br />
-                                <button type="button" class="AddCategoryButton" id="AddCategoryButton">Add Category</button>
+                                <button type="button" class="AddCategoryButton" id="AddCategoryButton">Nieuwe Categorie</button>
                             </label>
                             <div class="NewTaskDateTime">
                                 <label for="StartTaskDate">
-                                    Start task date:
+                                    Start taak dag:
                                     <input id="StartTaskDate" type="date" name="StartDate" required>
                                 </label> <br />
                                 <label for="EndTaskDate">
-                                    End task date:
+                                    Eind taak dag:
                                     <input id="EndTaskDate" type="date" name="EndDate" required>
                                 </label> <br />
                                 <label for="StartTaskTIme">
-                                    Start task time:
+                                    Start taak tijd:
                                     <input id="StartTaskTime" type="time" name="StartTime" required>
                                 </label> <br />
                                 <label for="EndTaskTime">
-                                    End task time:
+                                    Eind taak tijd:
                                     <input id="EndTaskTime" type="time" name="EndTime" required>
                                 </label>
                             </div>
                             <label for="TaskCapacity">
-                                Number of volunteers:
+                                Hoeveelheid vrijwilligers:
                                 <input id="TaskCapacity" type="number" min="0" name="Capacity" required />
                             </label>
-                            <button id="NewTaskFormSubmit" type="submit">Create Task</button>
+                            <button id="NewTaskFormSubmit" type="submit">Creëer Taak</button>
                             <input id="hiddenSubmit" type="hidden" name="Submit">
                         </form>
                     </div>
@@ -195,13 +195,13 @@ if (isset($_POST["Submit"])) {
                 <section class="SectionNewCategory" id="SectionNewCategory">
                     <div class="WrapperNewCategory">
                         <button class="CloseButton" id="NewCategoryClose">X</button>
-                        <h3 class="SectionHeader">New Category</h3>
+                        <h3 class="SectionHeader">Nieuwe categorie</h3>
                         <form class="NewCategoryForm" id="NewCategoryForm">
                             <label for="Category">
-                                Category:
+                                Categorie:
                                 <input id="NewCategory" type="text" name="Category" required>
                             </label>
-                            <button type="button" id="NewCategoryFormSubmit" type="submit">Create Category</button>
+                            <button type="button" id="NewCategoryFormSubmit" type="submit">Creëer categorie</button>
                         </form>
                     </div>
                 </section>

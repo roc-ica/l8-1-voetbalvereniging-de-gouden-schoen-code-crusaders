@@ -51,7 +51,7 @@ if (isset($_POST['submit'])) {
     <script src="https://kit.fontawesome.com/5622272db3.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@200&family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../Media/CSS/inlog.css">
-    <title>De Goeden Schoen || Register</title>
+    <title>De Goeden Schoen || Registreren</title>
 </head>
 
 <body>
@@ -91,7 +91,7 @@ if (isset($_POST['submit'])) {
 
                         <br>
                         <div class="submit_button">
-                            <button type="submit" class="submit" name="submit">Register</button>
+                            <button type="submit" class="submit" name="submit">Registreren</button>
                         </div>
                     </form>
                     <br>
