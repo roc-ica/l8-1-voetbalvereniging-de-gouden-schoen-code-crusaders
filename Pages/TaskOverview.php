@@ -134,7 +134,6 @@ if (isset($_POST["Submit"])) {
                         </div>
                     </div>
                     <button class="buttonLogin DeleteButton" value="<?php echo $row["Task_ID"] ?>">Delete task</button>
-                    <button class="buttonLogin EditButton" value="<?php echo $row["Task_ID"] ?>">Edit task</button>
                 </div>
 
             <?php endwhile ?>
@@ -251,7 +250,6 @@ if (isset($_POST["Submit"])) {
     };
 
     var deleteButtons = document.getElementsByClassName("DeleteButton");
-    var deleteButtons = document.getElementsByClassName("EditButton");
 
     for (let index = 0; index < deleteButtons.length; index++) {
         deleteButtons[index].addEventListener("click", function() {
