@@ -312,7 +312,10 @@ if (isset($_POST["Submit"])) {
                     var category = document.createElement("option");
                     category.value = data["CategoryId"];
                     category.text = data["Name"];
+                    category.selected = true;
                     document.getElementById("Category").appendChild(category);
+                    document.getElementById("SectionNewCategory").style.display = "none";
+                    document.getElementById("NewCategory").value = "";
                 })
                 .catch((error) => {});
         }
