@@ -1,10 +1,13 @@
 <?php
 include '../Media/Templates/DBConnect.php';
+include '../Media/Templates/header.php';
 session_start();
+
 if (!(isset($_SESSION['sessionid']) || $_SESSION['sessionid'] == session_id() || $_SESSION['role'] == 2)) {
     header("location: index.php");
 }
-include '../Media/Templates/header.php';
+
+// var_dump($_SESSION) ;
 
 if (isset($_GET['wisid'])) {
     $id = $_GET['wisid'];
@@ -17,46 +20,6 @@ if (isset($_GET['wisid'])) {
         }
         </script>';
 }
-
-if (isset($_POST['submit'])) {
-    $voornaam = htmlspecialchars($_POST['FirstName']);
-    $achternaam = htmlspecialchars($_POST['LastName']);
-    $email = htmlspecialchars($_POST['Email']);
-    $PASSWORD = htmlspecialchars($_POST['password']);
-    $Role = htmlspecialchars($_POST['Role']);
-
-    $hashed_password = password_hash($PASSWORD, PASSWORD_DEFAULT);
-    $stmt = $conn->prepare("INSERT INTO user (FirstName, LastName, Email, Password, `Role`) VALUES (?,?,?,?,?)");
-    $stmt->bind_param("ssss", $voornaam, $achternaam, $email, $hashed_password, $Role);
-    $stmt->execute();
-
-    $sql = "SELECT user_ID, email, `PASSWORD`, `Role` FROM user WHERE email =?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('s', $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-
-    try {
-        while ($row = $result->fetch_array()) {
-            //result is in row
-            $passwordreturn = password_verify($PASSWORD, $row['PASSWORD']);
-            // var_dump($passwordreturn); die;
-            $role = $row['Role'];
-
-            if ($passwordreturn) {
-                $_SESSION['email'] = $email;
-                $_SESSION['role'] = $role;
-                $_SESSION['uid'] = $row['user_ID'];
-                $_SESSION['sessionid'] = session_id();
-                header("Refresh:0.1; url=TaskOverview.php", true, 303);
-            }
-        }
-    } catch (Exception $e) {
-        $e->getMessage();
-    }
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -80,13 +43,6 @@ if (isset($_POST['submit'])) {
 <body>
     <div id="background">
         <div class="container">
-            <?php
-            if (isset($_SESSION["role"])) :
-                if ($_SESSION["role"] == 2) :
-                    ?>
-                    <button class="buttonLogin NewUserButton" id="NewUser">Nieuwe gebruiker</button>
-                <?php endif ?>
-            <?php endif ?>
             <table class="table_crud">
                 <thead>
                     <tr>
@@ -142,45 +98,6 @@ if (isset($_POST['submit'])) {
                 </tbody>
             </table>
         </div>
-        <?php
-        if (isset($_SESSION["email"])) :
-            if ($_SESSION["role"] == 2) :
-                ?>
-                <section class="SectionNewUser" id="SectionNewUser">
-                    <div class="WrapperNewUser">
-                        <button class="CloseButton" id="NewUserClose">X</button>
-                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" class="NewUserForm" id="NewUserForm">
-                            <label for="FirstName">
-                                Voornaam:
-                                <input id="FirstName" type="text" name="FirstName" required>
-                            </label>
-                            <label for="LastName">
-                                Achternaam:
-                                <input id="LastName" type="text" name="LastName" required>
-                            </label>
-                            <label for="Email">
-                                E-mail:
-                                <input id="Email" type="email" name="Email" required>
-                            </label>
-                            <label for="Role">
-                                Rol:
-                                <select name="Role" id="Role">
-                                    <option <?php if($Role == '0'){echo("selected");}?> value="0">Inactief</option>
-                                    <option <?php if($Role == '1'){echo("selected");}?> value="1">Gebruiker</option>
-                                    <option <?php if($Role == '2'){echo("selected");}?> value="2">Admin</option>
-                                </select>
-                            </label>
-                            <label for="password">
-                                Wachtwoord:
-                                <input type="password" class="input_veld" name="password" id="password" />
-                            </label>
-                            <button id="NewUserFormSubmit" type="submit">Gebruiker toevoegen</button>
-<!--                            <input id="hiddenSubmit" type="hidden" name="Submit">-->
-                        </form>
-                    </div>
-                </section>
-            <?php endif ?>
-        <?php endif ?>
     </div>
 </body>
 <script type="text/javascript">
@@ -188,44 +105,6 @@ if (isset($_POST['submit'])) {
         if (confirm("Weet je zeker dat je deze gebruiker wilt verwijderen?")) {
             window.location.href = "wis.php?wisid=" + user_ID;
         }
-    }
-
-</script>
-<script>
-    var taskForm = document.getElementById("NewUserForm");
-    var deleteButtons = document.getElementsByClassName("DeleteButton");
-
-    document.getElementById("NewUser").addEventListener("click", function() {
-        document.getElementById("SectionNewUser").style.display = "flex";
-    });
-
-    document.getElementById("NewUserClose").addEventListener("click", function() {
-        document.getElementById("SectionNewUser").style.display = "none";
-    });
-
-    // taskForm.addEventListener("submit", function(e) {
-    //     taskForm.submit();
-    // })
-
-    size_check();
-
-    document.getElementsByTagName("BODY")[0].onresize = function() {
-        size_check();
-    };
-
-
-    for (let index = 0; index < deleteButtons.length; index++) {
-        deleteButtons[index].addEventListener("click", function() {
-            DeleteTask(this.value);
-        })
-    };
-
-    function size_check() {
-        var r = document.querySelector(':root');
-        var rect = document.getElementsByTagName("header")[0].getBoundingClientRect()
-
-        var headerSize = Math.ceil(rect.height);
-        r.style.setProperty('--Header-Height', headerSize + 'px');
     }
 
 </script>

@@ -17,15 +17,24 @@
     </ul>
     <div class="Login-Header">
         <?php
-        if (!isset($_SESSION["email"])) :
+        if (!isset($_SESSION["role"])) :
         ?>
             <a href="../pages/InlogPage.php">
                 <button class="buttonLogin">Inloggen</button>
             </a>
-        <?php else : ?>
-            <a href="../Media/Templates/Logout.php">
-                <button class="buttonLogin">Log-Uit</button>
-            </a>
+            <?php else : if ($_SESSION["role"] == 2) : ?>
+                <div class="AdminDropdown">
+                    <button class="buttonLogin DropdownButton">gebruiker instellingen</button>
+                    <div class="AdminDropdownContent">
+                        <a class="DropdownContent" href="../Pages/UserOverview.php">gebruikers</a>
+                        <a class="DropdownContent" href="../Media/Templates/Logout.php">uitloggen</a>
+                    </div>
+                </div>
+            <?php else : ?>
+                <a href="../Media/Templates/Logout.php">
+                    <button class="buttonLogin">Log-Uit</button>
+                </a>
+            <?php endif ?>
         <?php endif ?>
         <button id="darkModeButton" class="buttonLogin">Donkere Modus</button>
     </div>

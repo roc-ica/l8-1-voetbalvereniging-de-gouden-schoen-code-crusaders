@@ -53,6 +53,30 @@ h1 {
 	cursor: pointer;
 }
 
+.AdminDropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.AdminDropdownContent {
+	display: none;
+	position: absolute;
+	background-color: #f1f1f1;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+}
+
+.AdminDropdownContent a {
+	padding: 1rem 1.5rem;
+	display: block;
+	text-decoration: none;
+}
+
+.AdminDropdown:hover .AdminDropdownContent {
+	display: block;
+}
+
 body.dark-mode .headerLink {
 	color: #ffffff;
 }
