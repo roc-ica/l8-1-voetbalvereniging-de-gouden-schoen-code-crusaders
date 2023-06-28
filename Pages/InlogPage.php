@@ -47,7 +47,7 @@ if (isset($_POST['submit'])) {
     <script src="https://kit.fontawesome.com/5622272db3.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@200&family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../Media/CSS/inlog.css">
-    <title>De gouden Schoen || Inlog</title>
+    <title>De gouden Schoen || Inloggen</title>
 </head>
 
 <body>

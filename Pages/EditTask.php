@@ -72,7 +72,7 @@ if (isset($_POST["submitId"])) {
     <style>
 
     </style>
-    <title>De Gouden Schoen || Taak verranderen</title>
+    <title>De Gouden Schoen || Taak aanpassen</title>
 </head>
 
 <body>
@@ -106,19 +106,19 @@ if (isset($_POST["submitId"])) {
                 </label>
                 <div class="EditTaskDateTime">
                     <label for="StartTaskDate">
-                        Begin taak datum:
+                        Startdatum taak:
                         <input id="StartTaskDate" type="date" name="StartDate" value="<?php echo $startDate ?>" required>
                     </label> <br />
                     <label for="EndTaskDate">
-                        Eind taak datum:
+                        Einddatum taak:
                         <input id="EndTaskDate" type="date" name="EndDate" value="<?php echo $endDate ?>" required>
                     </label> <br />
                     <label for="StartTaskTIme">
-                        Begin taak tijd:
+                        Begintijd taak:
                         <input id="StartTaskTime" type="time" name="StartTime" value="<?php echo $startTime ?>" required>
                     </label> <br />
                     <label for="EndTaskTime">
-                        Eind taak tijd:
+                        Eindtijd taak:
                         <input id="EndTaskTime" type="time" name="EndTime" value="<?php echo $endTime ?>" required>
                     </label>
                 </div>
@@ -126,7 +126,7 @@ if (isset($_POST["submitId"])) {
                     Hoeveelheid vrijwilligers:
                     <input id="TaskCapacity" type="number" min="0" name="Capacity" value="<?php echo $capacity ?>" required />
                 </label>
-                <button id="EditTaskFormSubmit" type="submit">Verrander taak</button>
+                <button id="EditTaskFormSubmit" type="submit">Verander taak</button>
                 <input id="hiddenSubmit" type="hidden" name="Submit">
             </form>
         </div>
@@ -140,7 +140,7 @@ if (isset($_POST["submitId"])) {
                     Categorie:
                     <input id="EditCategory" type="text" name="Category" required>
                 </label>
-                <button type="button" id="EditCategoryFormSubmit" type="submit">Creëer categorie</button>
+                <button type="button" id="EditCategoryFormSubmit" type="submit">Categorie aanmaken</button>
             </form>
         </div>
     </section>

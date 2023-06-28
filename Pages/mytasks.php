@@ -97,7 +97,7 @@ if (isset($_POST['submit'])) {
                             <div>
                                 <h4>Tijd</h4>
                                 <div>
-                                    <h5>Start dag</h5>
+                                    <h5>Startdatum</h5>
                                     <div>
                                         <?php
                                         $datetime = explode(" ", $row["StartDate"]);
@@ -107,7 +107,7 @@ if (isset($_POST['submit'])) {
                                             </p>
                                         <?php endfor ?>
                                     </div>
-                                    <h5>Eind dag</h5>
+                                    <h5>Einddatum</h5>
                                     <div>
                                         <?php
                                         $datetime = explode(" ", $row["EndDate"]);

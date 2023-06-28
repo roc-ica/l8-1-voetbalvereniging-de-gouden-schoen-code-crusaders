@@ -69,18 +69,18 @@ if (isset($_POST['submit'])) {
                     <br>
                     <form class="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                         <div class="form__veld">
-                            <label for="email">voornaam</label><br>
+                            <label for="email">Voornaam</label><br>
                             <input type="text" class="input_veld" name="voornaam" id="voornaam">
                         </div>
                         <br>
                         <div class="form__veld">
-                            <label for="email">achternaam</label><br>
+                            <label for="email">Achternaam</label><br>
                             <input type="text" class="input_veld" name="achternaam" id="achternaam">
                         </div>
                         <br>
                         <div class="form__veld">
                             <label for="email">Email</label><br>
-                            <input type="text" class="input_veld" name="email" id="email">
+                            <input type="email" class="input_veld" name="email" id="email">
                         </div>
                         <br>
                         <div class="form__veld">
