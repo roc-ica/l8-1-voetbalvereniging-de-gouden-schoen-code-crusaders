@@ -4,14 +4,14 @@
 <header>
     <h1 class="Logo-Header">De <span class="gold">Gouden</span> schoen</h1>
     <ul class="ulheader">
-        <li class="liheader"><a class="headerLink" href="../Pages/index.php">Home</a></li>
+        <li class="liheader"><a class="headerLink" href="../Pages/index.php">Start pagina</a></li>
         <li class="liheader"><a class="headerLink" href="../Pages/mytasks.php">Agenda</a></li>
-        <li class="liheader"><a class="headerLink" href="../Pages/TaskSignup.php">Asign tasks</a></li>
+        <li class="liheader"><a class="headerLink" href="../Pages/TaskSignup.php">Taak toewijzen</a></li>
         <?php
         if (isset($_SESSION["email"])) :
             if ($_SESSION["role"] == 2) :
         ?>
-                <li class="liheader"><a class="headerLink" href="../Pages/TaskOverview.php">Task overview</a></li>
+                <li class="liheader"><a class="headerLink" href="../Pages/TaskOverview.php">Taken bekijken</a></li>
             <?php endif ?>
         <?php endif ?>
     </ul>

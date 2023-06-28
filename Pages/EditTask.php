@@ -72,7 +72,7 @@ if (isset($_POST["submitId"])) {
     <style>
 
     </style>
-    <title>De Gouden Schoen || Task Edit</title>
+    <title>De Gouden Schoen || Taak verranderen</title>
 </head>
 
 <body>
@@ -85,7 +85,7 @@ if (isset($_POST["submitId"])) {
             <form action="" method="post" class="EditTaskForm" id="EditTaskForm">
                 <input type="hidden" name="TaskId" value="<?php echo $_POST["submitId"] ?>" />
                 <label for="Task">
-                    Task:
+                    Taak:
                     <input id="Task" type="text" name="Task" value="<?php echo $title ?>" required>
                 </label>
                 <label for="Category">
@@ -102,28 +102,28 @@ if (isset($_POST["submitId"])) {
                             <?php endif ?>
                         <?php endwhile ?>
                     </select> <br />
-                    <button type="button" class="AddCategoryButton" id="AddCategoryButton">Add Category</button>
+                    <button type="button" class="AddCategoryButton" id="AddCategoryButton">Voeg een categorie toe</button>
                 </label>
                 <div class="EditTaskDateTime">
                     <label for="StartTaskDate">
-                        Start task date:
+                        Begin taak datum:
                         <input id="StartTaskDate" type="date" name="StartDate" value="<?php echo $startDate ?>" required>
                     </label> <br />
                     <label for="EndTaskDate">
-                        End task date:
+                        Eind taak datum:
                         <input id="EndTaskDate" type="date" name="EndDate" value="<?php echo $endDate ?>" required>
                     </label> <br />
                     <label for="StartTaskTIme">
-                        Start task time:
+                        Begin taak tijd:
                         <input id="StartTaskTime" type="time" name="StartTime" value="<?php echo $startTime ?>" required>
                     </label> <br />
                     <label for="EndTaskTime">
-                        End task time:
+                        Eind taak tijd:
                         <input id="EndTaskTime" type="time" name="EndTime" value="<?php echo $endTime ?>" required>
                     </label>
                 </div>
                 <label for="TaskCapacity">
-                    Number of volunteers:
+                    Nummer aan vrijwilligers:
                     <input id="TaskCapacity" type="number" min="0" name="Capacity" value="<?php echo $capacity ?>" required />
                 </label>
                 <button id="EditTaskFormSubmit" type="submit">Edit Task</button>
@@ -134,13 +134,13 @@ if (isset($_POST["submitId"])) {
     <section class="SectionEditCategory" id="SectionEditCategory">
         <div class="WrapperEditCategory">
             <button class="CloseButton" id="EditCategoryClose">X</button>
-            <h3 class="SectionHeader">New Category</h3>
+            <h3 class="SectionHeader">Nieuwe categorie</h3>
             <form class="EditCategoryForm" id="EditCategoryForm">
                 <label for="Category">
-                    Category:
+                    Categorie:
                     <input id="EditCategory" type="text" name="Category" required>
                 </label>
-                <button type="button" id="EditCategoryFormSubmit" type="submit">Create Category</button>
+                <button type="button" id="EditCategoryFormSubmit" type="submit">Creër categorie</button>
             </form>
         </div>
     </section>
