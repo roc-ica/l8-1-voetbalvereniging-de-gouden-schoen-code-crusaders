@@ -53,7 +53,7 @@ if (isset($_POST["Submit"])) {
     <?php include "../Media/Templates/header.php" ?>
     <section class="TaskSection">
         <?php
-        if (isset($_SESSION["email"])) :
+        if (isset($_SESSION["role"])) :
             if ($_SESSION["role"] == 2) :
         ?>
                 <button class="buttonLogin NewTaskButton" id="NewTask">New Task</button>

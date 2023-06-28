@@ -72,7 +72,7 @@ if (isset($_POST["submitId"])) {
     <style>
 
     </style>
-    <title>De Gouden Schoen || Task Overview</title>
+    <title>De Gouden Schoen || Task Edit</title>
 </head>
 
 <body>
