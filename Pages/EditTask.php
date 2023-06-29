@@ -197,7 +197,10 @@ if (isset($_POST["submitId"])) {
                     var category = document.createElement("option");
                     category.value = data["CategoryId"];
                     category.text = data["Name"];
+                    category.selected = true;
                     document.getElementById("Category").appendChild(category);
+                    document.getElementById("SectionEditCategory").style.display = "none";
+                    document.getElementById("NewCategory").value = "";
                 })
                 .catch((error) => {});
         }
