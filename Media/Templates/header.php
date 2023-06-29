@@ -6,7 +6,7 @@
     <ul class="ulheader">
         <li class="liheader"><a class="headerLink" href="../Pages/index.php">Startpagina</a></li>
         <li class="liheader"><a class="headerLink" href="../Pages/mytasks.php">Agenda</a></li>
-        <li class="liheader"><a class="headerLink" href="../Pages/TaskSignup.php">Taak toewijzen</a></li>
+        <li class="liheader"><a class="headerLink" href="../Pages/TaskSignup.php">Taak aanmelden</a></li>
         <?php
         if (isset($_SESSION["email"])) :
             if ($_SESSION["role"] == 2) :
