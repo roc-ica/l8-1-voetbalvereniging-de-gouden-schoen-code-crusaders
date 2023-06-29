@@ -51,22 +51,22 @@ if (isset($_POST['submit'])) {
     <script src="https://kit.fontawesome.com/5622272db3.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@200&family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../Media/CSS/inlog.css">
+    <link rel="stylesheet" href="../Media/CSS/header.css">
+    <link rel="stylesheet" href="../Media/CSS/main.css">
     <title>De Goeden Schoen || Registreren</title>
 </head>
 
 <body>
     <div class="blok1"></div>
-    <div class="blok2"></div>
 
     <div id="content">
         <div class="blok">
             <div class="veld">
                 <img src="../Media/img/schoen.jpg">
                 <div class="inlog">
-                    <br>
+
                     <h2>Registreer</h2>
-                    <br>
-                    <br>
+
                     <form class="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                         <div class="form__veld">
                             <label for="email">Voornaam</label><br>
@@ -94,8 +94,7 @@ if (isset($_POST['submit'])) {
                             <button type="submit" class="submit" name="submit">Registreren</button>
                         </div>
                     </form>
-                    <br>
-                    <br>
+
                     <div class="copy">
                         <p>© De gouden schoen. All rights reserved | Design by Code Crusaders</p>
                     </div>
